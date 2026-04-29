@@ -14,14 +14,14 @@
             "url": "https://altsumkanews.github.io/historyproje/school-project.html",
             "title": "School project",
             "summary": "English Welcome! You can read this project in English to understand the historical roots of the current war and the cycles of imperial aggression. [Read in English] Українська(Ukranian) Вітаємо! Ви можете прочитати цей проєкт українською мовою, щоб дослідити «історичну петлю» та тяглість боротьби за нашу&hellip;",
-            "content_html": "\n  <p>\n    <strong>English</strong><br>Welcome!<br>You can read this project in English to understand the historical roots of the current war and the cycles of imperial aggression.<br>[Read in English]\n  </p>\n\n  <p>\n    <strong>Українська(Ukranian)<br></strong>Вітаємо!<br>Ви можете прочитати цей проєкт українською мовою, щоб дослідити «історичну петлю» та тяглість боротьби за нашу незалежність.<br>[Читати українською]\n  </p>\n\n  <p>\n    <strong>Deutsch(German)</strong><br>Willkommen!<br>Sie können dieses Projekt auf Deutsch lesen, um die historischen Hintergründe des aktuellen Krieges und die Zyklen der imperialen Aggression zu verstehen.<br>[Auf Deutsch lesen]\n  </p>",
+            "content_html": "\n  <p>\n    <strong>English</strong><br>Welcome!<br>You can read this project in English to understand the historical roots of the current war and the cycles of imperial aggression.<br><a href=\"https://altsumkanews.github.io/historyproje/introduction-war-as-a-historical-phenomenon.html\">[Read in English]</a>\n  </p>\n\n  <p>\n    <strong>Українська(Ukranian)<br></strong>Вітаємо!<br>Ви можете прочитати цей проєкт українською мовою, щоб дослідити «історичну петлю» та тяглість боротьби за нашу незалежність.<br><a href=\"https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html\">[Читати українською]</a>\n  </p>\n\n  <p>\n    <strong>Deutsch(German)</strong><br>Willkommen!<br>Sie können dieses Projekt auf Deutsch lesen, um die historischen Hintergründe des aktuellen Krieges und die Zyklen der imperialen Aggression zu verstehen.<br><a href=\"https://altsumkanews.github.io/historyproje/einleitung-krieg-als-historisches-phaenomen.html\">[Auf Deutsch lesen]</a>\n  </p>",
             "author": {
                 "name": "Shtan Bohdan"
             },
             "tags": [
             ],
             "date_published": "2026-04-29T16:19:54+03:00",
-            "date_modified": "2026-04-29T16:24:07+03:00"
+            "date_modified": "2026-04-29T17:05:25+03:00"
         }
     ]
 }
