@@ -1,41 +1,105 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="uk">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Germany & Ukraine - The Historical Loop</title>
-    <link rel="stylesheet" href="https://altsumkanews.github.io/historyproje/assets/css/style.css?v=a0ba884548820066dfadd8416036abba">
+    <title>Ukraine & Germany - Historical Relations</title>
     <style>
-        :root { --ua-gold: #ffd700; --accent-red: #ce1212; }
-        body { background: #121212; color: #e0e0e0; }
+        :root { --ua-gold: #ffd700; --accent-red: #ce1212; --bg: #121212; }
+        body { background: var(--bg); color: #e0e0e0; font-family: sans-serif; margin: 0; }
         .top { padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; border-bottom: 1px solid #333; }
-        .logo { font-weight: 900; color: #fff; text-decoration: none; }
-        .custom-wrapper { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        .card-de { background: #1e1e1e; border-radius: 15px; padding: 30px; margin-bottom: 25px; border-top: 4px solid var(--accent-red); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        h2 { color: var(--ua-gold); }
+        .logo { font-weight: 900; color: #fff; text-decoration: none; text-transform: uppercase; }
+        
+        .custom-wrapper { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .card-de { 
+            background: #1e1e1e; 
+            border-radius: 15px; 
+            padding: 30px; 
+            margin-bottom: 25px; 
+            border-left: 5px solid var(--ua-gold);
+            border-right: 5px solid #000; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        .card-de:hover { transform: scale(1.01); }
+        
+        h2 { color: var(--ua-gold); margin-top: 0; }
+        .btn-l { 
+            background: transparent; border: 1px solid #444; color: #fff; 
+            padding: 8px 25px; border-radius: 20px; cursor: pointer; 
+            margin: 0 5px 30px; font-weight: bold;
+        }
+        .btn-l.active { border-color: var(--ua-gold); color: var(--ua-gold); background: rgba(255,215,0,0.1); }
+        
         .navbar__menu { display: flex; list-style: none; gap: 20px; margin: 0; }
-        .navbar__menu a { color: white; text-decoration: none; font-size: 0.9em; font-weight: 600; }
-        .btn-l { background: transparent; border: 1px solid #444; color: #fff; padding: 5px 15px; border-radius: 20px; cursor: pointer; margin-bottom: 30px; }
-        .btn-l.active { border-color: var(--ua-gold); color: var(--ua-gold); }
+        .navbar__menu a { color: #aaa; text-decoration: none; font-weight: 600; }
+        .navbar__menu a:hover { color: #fff; }
+
+        .timeline-header { text-align: center; margin-bottom: 50px; }
+        .timeline-header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .intro-text { color: #bbb; max-width: 700px; margin: 0 auto 30px; }
     </style>
 </head>
 <body>
     <header class="top">
         <a class="logo" href="index.html">History Project</a>
-        <nav><ul class="navbar__menu"><li><a href="index.html">Home</a></li><li><a href="sources.html">Quellen</a></li></ul></nav>
+        <nav><ul class="navbar__menu"><li><a href="index.html">Home</a></li><li><a href="sources.html">Sources</a></li></ul></nav>
     </header>
 
     <main class="custom-wrapper">
-        <div style="text-align: center;">
-            <button class="btn-l active" onclick="changeL('ua', this)">UA</button>
-            <button class="btn-l" onclick="changeL('de', this)">DE</button>
+        <div class="timeline-header">
+            <div style="margin-bottom: 20px;">
+                <button class="btn-l active" onclick="changeL('ua', this)">UA</button>
+                <button class="btn-l" onclick="changeL('de', this)">DE</button>
+            </div>
+            <h1 id="m-title"></h1>
+            <p class="intro-text" id="m-intro"></p>
         </div>
-        <h1 id="m-title" style="text-align: center; margin-bottom: 40px;"></h1>
+
         <div id="cards"></div>
     </main>
 
     <script>
-        /* Скопіюй сюди об'єкт info та функцію changeL з попереднього коду для Німеччини */
+        const info = {
+            ua: {
+                title: "Україна та Німеччина: Шлях Співпраці",
+                intro: "Від геополітики Першої світової до сучасного стратегічного партнерства — історія двох країн, що формують майбутнє Європи.",
+                points: [
+                    { t: "1918: Перше Визнання", d: "Німеччина була однією з перших держав, що визнали УНР після Берестейського миру. Це був час Гетьманату Скоропадського, коли німецька модель державності впливала на українські реформи." },
+                    { t: "Трагедія та Пам'ять", d: "Складні сторінки Другої світової війни сьогодні трансформувалися у глибоку політику пам'яті та примирення." },
+                    { t: "Zeitenwende (Зміна епох)", d: "Після 2022 року Німеччина радикально змінила свою політику, ставши одним із найбільших постачальників допомоги Україні, визнаючи її частиною європейської родини." }
+                ]
+            },
+            de: {
+                title: "Ukraine & Deutschland: Weg der Zusammenarbeit",
+                intro: "Von der Geopolitik des Ersten Weltkriegs bis zur heutigen strategischen Partnerschaft — die Geschichte zweier Länder, die die Zukunft Europas prägen.",
+                points: [
+                    { t: "1918: Erste Anerkennung", d: "Deutschland gehörte zu den ersten Staaten, die die Ukrainische Volksrepublik nach dem Friedensvertrag von Brest-Litowsk anerkannten." },
+                    { t: "Tragödie und Erinnerung", d: "Die schwierigen Seiten des Zweiten Weltkriegs haben sich heute in eine tiefe Erinnerungskultur und Versöhnung gewandelt." },
+                    { t: "Zeitenwende", d: "Seit 2022 hat Deutschland seine Politik radikal geändert und ist zu einem der größten Unterstützer der Ukraine geworden." }
+                ]
+            }
+        };
+
+        function changeL(lang, btn) {
+            document.querySelectorAll('.btn-l').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const content = info[lang];
+            document.getElementById('m-title').innerText = content.title;
+            document.getElementById('m-intro').innerText = content.intro;
+            
+            const container = document.getElementById('cards');
+            container.innerHTML = content.points.map(p => `
+                <div class="card-de">
+                    <h2>${p.t}</h2>
+                    <p>${p.d}</p>
+                </div>
+            `).join('');
+        }
+
+        // Start
+        changeL('ua', document.querySelector('.btn-l'));
     </script>
 </body>
 </html>
