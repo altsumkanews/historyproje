@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sources - The Historical Loop</title>
+    <link rel="stylesheet" href="https://altsumkanews.github.io/historyproje/assets/css/style.css?v=a0ba884548820066dfadd8416036abba">
+    
+    <style>
+        :root {
+            --ua-blue: #0057b7;
+            --ua-gold: #ffd700;
+            --accent-red: #ce1212;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #e0e0e0;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #121212, #1a1a1a);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .custom-wrapper { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+
+        .sources-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 { font-size: 3em; font-weight: 900; margin-bottom: 40px; text-align: center; color: #fff; }
+        h2 { color: var(--ua-gold); border-bottom: 1px solid #444; padding-bottom: 10px; margin-top: 30px; }
+
+        .source-list { list-style: none; padding: 0; }
+        .source-list li { margin: 15px 0; padding-left: 25px; position: relative; }
+        .source-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent-red); font-weight: bold; }
+        
+        .source-list a { color: var(--text-main); text-decoration: none; transition: 0.3s; border-bottom: 1px solid transparent; }
+        .source-list a:hover { color: var(--ua-gold); border-bottom-color: var(--ua-gold); }
+
+        .methodology-box {
+            background: rgba(206, 18, 18, 0.05);
+            border-left: 4px solid var(--accent-red);
+            padding: 25px;
+            margin-top: 50px;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .footer-note { font-size: 0.9em; color: #777; margin-top: 40px; text-align: center; font-style: italic; }
+
+        /* Navbar Styling */
+        .navbar__menu { display: flex; align-items: center; list-style: none; }
+        .logo { font-weight: 900; text-decoration: none; color: #fff; font-size: 1.5em; }
+        .top { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(18,18,18,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; }
+        .navbar__menu a { color: #fff; text-decoration: none; margin-left: 20px; font-weight: 600; }
+    </style>
+</head>
+
+<body>
+    <header class="top">
+        <a class="logo" href="index.html">History Project</a>
+        <nav class="navbar">
+            <ul class="navbar__menu">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html">Вступ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="custom-wrapper">
+        <h1>Використані джерела</h1>
+
+        <section class="sources-card">
+            <h2>Міжнародні дослідження та ресурси</h2>
+            <ul class="source-list">
+                <li><a href="https://online.yale.edu/courses/making-modern-ukraine" target="_blank">Yale University: The Making of Modern Ukraine (Timothy Snyder)</a></li>
+                <li><a href="https://www.britannica.com/place/Ukraine/History" target="_blank">Encyclopedia Britannica: History of Ukraine</a></li>
+                <li><a href="https://www.theguardian.com/world/2022/feb/25/vladimir-putin-ukraine-history-speech-guide" target="_blank">The Guardian: Putin’s use of history to justify the war</a></li>
+                <li><a href="https://www.atlanticcouncil.org/blogs/ukrainealert/" target="_blank">Atlantic Council: UkraineAlert Service</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/History_of_Ukraine" target="_blank">Wikipedia: History of Ukraine (Global Edition)</a></li>
+            </ul>
+
+            <h2>Українські історичні ресурси</h2>
+            <ul class="source-list">
+                <li><a href="http://history.org.ua/uk" target="_blank">Інститут історії України НАН України</a></li>
+                <li><a href="https://uinp.gov.ua/" target="_blank">Український інститут національної пам'яті</a></li>
+                <li><a href="https://localhistory.org.ua/" target="_blank">Проєкт «Локальна історія»</a></li>
+                <li><a href="https://shron1.chtyvo.org.ua/" target="_blank">Електронна бібліотека «Чтиво» (Історичні документи)</a></li>
+                <li><a href="https://uk.wikipedia.org/wiki/Історія_України" target="_blank">Вікіпедія: Історія України</a></li>
+            </ul>
+
+            <h2>Офіційні документи</h2>
+            <ul class="source-list">
+                <li><a href="https://archives.gov.ua/" target="_blank">Державна архівна служба України</a></li>
+                <li><a href="https://mfa.gov.ua/pro-ukrayinu/istoriya-ukrayini" target="_blank">МЗС України: Історія та сучасність</a></li>
+            </ul>
+        </section>
+
+        <section class="methodology-box">
+            <h3 style="margin-top: 0; color: #fff;">Методологія та дослідження</h3>
+            <p>В межах підготовки проєкту було проведено соціологічне опитування серед студентів провідних навчальних закладів України для аналізу сприйняття історичної тяглості російсько-української війни:</p>
+            <ul style="color: #bbb; padding-left: 20px;">
+                <li><strong>Київський Національний Університет імені Тараса Шевченка</strong></li>
+                <li><strong>Львівський Національний Університет імені Івана Франка</strong></li>
+            </ul>
+            <p style="margin-bottom: 0; font-size: 0.95em;">Результати опитування підтверджують високий рівень усвідомлення сучасного конфлікту як продовження багатовікової імперської політики Росії.</p>
+        </section>
+
+        <footer class="footer-note">
+            Переклад матеріалів та адаптація термінів виконані за допомогою: <br>
+            <strong>DeepL</strong>, <strong>Google Translate</strong> та <strong>Google Gemini</strong>.
+        </footer>
+    </main>
+</body>
+</html>
