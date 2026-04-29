@@ -9,257 +9,257 @@
     
     <style>
         :root {
-            --ua-color: #ffd700;
-            --en-color: #0057b7;
-            --de-color: #ffce00;
-            --accent-red: #d32f2f;
-            --dark-bg: #121212;
+            --ua-blue: #0057b7;
+            --ua-gold: #ffd700;
+            --accent-red: #ce1212;
+            --glass: rgba(255, 255, 255, 0.95);
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Анімації */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-flux { animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Контейнер */
+        .custom-wrapper { max-width: 1000px; margin: 0 auto; padding: 20px; font-family: inherit; }
+
+        /* Мовний селектор */
+        .control-panel { 
+            display: flex; justify-content: center; gap: 10px; margin: 30px 0; 
+            background: #f4f4f4; padding: 10px; border-radius: 50px;
+        }
+        .lang-trigger {
+            border: none; padding: 12px 25px; border-radius: 30px; cursor: pointer;
+            font-weight: 700; background: transparent; transition: 0.3s; color: #555;
+        }
+        .lang-trigger.active { background: #333; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* ПРОФЕСІЙНИЙ СЛОВНИК (ЗБІЛЬШЕНИЙ) */
+        .glossary-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: white; border-radius: 24px; padding: 60px 40px;
+            text-align: center; cursor: pointer; position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15); margin-bottom: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .glossary-section:hover { transform: translateY(-2px); transition: 0.3s; }
+        .glossary-tag { font-size: 0.8em; letter-spacing: 4px; color: var(--ua-gold); text-transform: uppercase; margin-bottom: 20px; display: block; }
+        .glossary-title { font-size: 2.8em; margin: 10px 0; font-weight: 800; line-height: 1.2; }
+        .glossary-desc { font-size: 1.3em; line-height: 1.6; color: #ccc; max-width: 800px; margin: 20px auto; min-height: 100px; }
+
+        /* ПЕТЛЯ ЧАСУ */
+        .loop-header { text-align: center; margin: 60px 0 40px; }
+        .loop-header h2 { font-size: 2.5em; font-weight: 900; position: relative; display: inline-block; }
+        .loop-header h2::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 100%; height: 4px; background: var(--accent-red); }
+
+        .loop-container { border-left: 4px solid #333; padding-left: 35px; position: relative; margin-left: 20px; }
+        .loop-item { margin-bottom: 25px; list-style: none; }
+        .loop-item summary {
+            padding: 20px; background: white; border: 1px solid #eee; border-radius: 12px;
+            font-size: 1.2em; font-weight: 700; cursor: pointer; transition: 0.3s;
+            position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .loop-item summary:hover { border-color: var(--accent-red); background: #fffafa; }
+        .loop-item summary::before {
+            content: ''; position: absolute; left: -45px; top: 50%; transform: translateY(-50%);
+            width: 16px; height: 16px; background: var(--accent-red); border-radius: 50%; border: 4px solid white;
+        }
+        .loop-item[open] summary { background: #333; color: white; border-color: #333; }
+        .loop-content { 
+            padding: 25px; background: #fdfdfd; border: 1px solid #eee; border-top: none;
+            border-radius: 0 0 12px 12px; font-size: 1.1em; line-height: 1.7; color: #444;
         }
 
-        .animate { animation: slideUp 0.4s ease-out; }
-
-        /* Навігація (Повернення та покращення) */
-        .top { background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .navbar__menu { list-style: none; display: flex; gap: 20px; padding: 15px; margin: 0; justify-content: center; }
-        .navbar__menu a { text-decoration: none; color: #333; font-weight: 600; font-size: 0.9em; transition: 0.3s; }
-        .navbar__menu a:hover { color: var(--accent-red); }
-
-        /* Вступні блоки */
-        .lang-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
-        .lang-box { padding: 20px; border-radius: 12px; background: #fdfdfd; border: 1px solid #eee; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .lang-box b { display: block; margin-bottom: 8px; color: #555; }
-
-        /* Глобальний перемикач */
-        .global-switcher { text-align: center; margin: 30px 0; background: #f0f0f0; padding: 15px; border-radius: 15px; }
-        .lang-btn { 
-            background: white; border: 2px solid transparent; padding: 10px 25px; 
-            border-radius: 30px; cursor: pointer; font-weight: 700; margin: 5px; transition: 0.3s;
+        .cta-button {
+            display: inline-block; padding: 20px 50px; background: var(--accent-red);
+            color: white !important; border-radius: 50px; text-decoration: none;
+            font-weight: 800; font-size: 1.2em; margin-top: 40px; transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(206, 18, 18, 0.3);
         }
-        .lang-btn.active { background: var(--dark-bg); color: white; transform: scale(1.1); }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(206, 18, 18, 0.4); }
 
-        /* Словник (ЗБІЛЬШЕНИЙ) */
-        .glossary-card { 
-            background: linear-gradient(145deg, #1e1e1e, #000); color: white; padding: 45px 30px; 
-            border-radius: 20px; text-align: center; cursor: pointer; margin: 30px 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); border: 1px solid #333;
-        }
-        .glossary-card h3 { color: var(--ua-color); font-size: 2em; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255,215,0,0.3); }
-        .glossary-card p { font-size: 1.2em; line-height: 1.6; min-height: 80px; color: #ddd; }
-
-        /* ПЕТЛЯ ЧАСУ (ЗБІЛЬШЕНА ТА ІНТЕРАКТИВНА) */
-        .timeline-header-container { text-align: center; margin-top: 60px; }
-        .timeline-container { position: relative; max-width: 800px; margin: 40px auto; padding-left: 40px; border-left: 4px solid var(--dark-bg); }
-        .timeline-item { position: relative; margin-bottom: 30px; }
-        .timeline-item::before { 
-            content: ""; position: absolute; left: -49px; top: 15px; 
-            width: 14px; height: 14px; background: var(--accent-red); 
-            border: 4px solid white; border-radius: 50%; box-shadow: 0 0 10px rgba(211,47,47,0.5);
-        }
-        .timeline-item summary { 
-            font-size: 1.3em; font-weight: 800; padding: 15px 20px; 
-            background: #fff; border: 1px solid #ddd; border-radius: 10px; 
-            cursor: pointer; list-style: none; transition: 0.3s;
-        }
-        .timeline-item summary:hover { background: #f9f9f9; transform: translateX(10px); }
-        .timeline-item[open] summary { background: var(--dark-bg); color: white; border-color: var(--dark-bg); }
-        .timeline-content { 
-            padding: 20px; font-size: 1.05em; background: #fff; 
-            border: 2px solid var(--dark-bg); border-top: none; border-radius: 0 0 10px 10px;
-        }
-
-        /* Кнопка старту */
-        .start-btn { 
-            display: block; width: fit-content; margin: 60px auto; 
-            background: var(--accent-red); color: white !important; 
-            padding: 22px 50px; border-radius: 100px; text-decoration: none; 
-            font-weight: 900; font-size: 1.2em; text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(211, 47, 47, 0.4); transition: 0.4s;
-        }
-        .start-btn:hover { letter-spacing: 2px; transform: scale(1.05); }
+        /* Стилі для системної навігації, щоб вона не зникала */
+        .top { width: 100%; }
     </style>
 </head>
 
 <body>
     <header class="top js-header">
-        <div class="wrapper">
-            <nav class="navbar js-navbar">
-                <ul class="navbar__menu">
-                    <li class="active"><a href="#">Головна / Home</a></li>
-                    <li><a href="https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html">Вступ</a></li>
-                    <li><a href="https://altsumkanews.github.io/historyproje/period-getmanshchini.html">Епохи</a></li>
-                    <li><a href="https://altsumkanews.github.io/historyproje/navigaciya-po-proiektu-dlya-en-de-project-navigation-en-projekt-navigation-de.html">Navigation</a></li>
-                </ul>
-            </nav>
-        </div>
+        <a class="logo" href="https://altsumkanews.github.io/historyproje/">School History Project</a>
+        <nav class="navbar js-navbar">
+            <button class="navbar__toggle js-toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false">
+                <span class="navbar__toggle-box"><span class="navbar__toggle-inner">Menu</span></span>
+            </button>
+            <ul class="navbar__menu">
+                <li class="active"><a href="https://altsumkanews.github.io/historyproje/">Homepage</a></li>
+                <li><a href="https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html">Вступ</a></li>
+                <li class="has-submenu">
+                    <a href="#">Епохи</a>
+                    <ul class="navbar__submenu level-2">
+                        <li><a href="https://altsumkanews.github.io/historyproje/period-getmanshchini.html">Гетьманщина</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </header>
 
-    <main class="page">
-        <article class="content">
-            <div class="wrapper content__entry">
-                
-                <h1 style="text-align: center; font-size: 3em; margin: 40px 0;">History Loop 🔄</h1>
+    <main class="custom-wrapper">
+        <section class="intro-grid" style="margin-top: 40px; text-align: center;">
+            <h1 style="font-size: 3.5em; font-weight: 900; margin-bottom: 10px;">The Historical Loop</h1>
+            <p style="font-size: 1.2em; color: #666; max-width: 700px; margin: 0 auto;">
+                Аналіз багатовікового циклу агресії. Від 1700-х до сьогодні.
+            </p>
+        </section>
 
-                <div class="lang-container">
-                    <div class="lang-box ua"><b>🇺🇦 UA:</b> Дослідження багатовікового циклу агресії проти України.</div>
-                    <div class="lang-box en"><b>🇬🇧 EN:</b> Exploring the centuries-long cycle of aggression against Ukraine.</div>
-                    <div class="lang-box de"><b>🇩🇪 DE:</b> Untersuchung des jahrhundertelangen Zyklus der Aggression.</div>
-                </div>
+        <div class="control-panel">
+            <button class="lang-trigger active" onclick="updateAppLang('ua', this)">🇺🇦 UA</button>
+            <button class="lang-trigger" onclick="updateAppLang('en', this)">🇬🇧 EN</button>
+            <button class="lang-trigger" onclick="updateAppLang('de', this)">🇩🇪 DE</button>
+        </div>
 
-                <div class="global-switcher">
-                    <button class="lang-btn active" onclick="changeGlobalLang('ua', this)">🇺🇦 UA</button>
-                    <button class="lang-btn" onclick="changeGlobalLang('en', this)">🇬🇧 EN</button>
-                    <button class="lang-btn" onclick="changeGlobalLang('de', this)">🇩🇪 DE</button>
-                </div>
-
-                <div class="glossary-card" onclick="nextTerm()">
-                    <small id="glossary-label" style="letter-spacing: 3px; color: #888;">СЛОВНИК ТЕРМІНІВ</small>
-                    <div id="glossary-content" class="animate">
-                        <h3 id="term-title">Гетьманщина</h3>
-                        <p id="term-desc">Завантаження...</p>
-                    </div>
-                    <div style="margin-top: 20px; font-size: 0.8em; color: var(--ua-color);">Клікніть, щоб змінити термін ↻</div>
-                </div>
-
-                <div class="timeline-header-container">
-                    <h2 id="timeline-header" style="font-size: 2.5em;">📜 Петля часу</h2>
-                    <p style="color: #666;" id="timeline-sub">Натисніть на ключові дати, щоб розкрити історію</p>
-                </div>
-
-                <div id="timeline-list" class="timeline-container">
-                    </div>
-
-                <a href="https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html" class="start-btn" id="start-btn-text">РОЗПОЧАТИ ДОСЛІДЖЕННЯ ➔</a>
+        <div class="glossary-section" onclick="rotateTerm()">
+            <span id="g-label" class="glossary-tag">Словник термінів</span>
+            <div id="g-box" class="animate-flux">
+                <h3 id="g-title" class="glossary-title">Гетьманщина</h3>
+                <p id="g-desc" class="glossary-desc">Українська козацька держава XVII-XVIII століть.</p>
             </div>
-        </article>
+            <div style="font-size: 0.8em; opacity: 0.6; margin-top: 30px;">Натисніть на картку, щоб змінити термін ↻</div>
+        </div>
+
+        <div class="loop-header">
+            <h2 id="l-header">Петля часу</h2>
+        </div>
+
+        <div id="l-container" class="loop-container">
+            </div>
+
+        <div style="text-align: center; margin-bottom: 80px;">
+            <a href="https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html" class="cta-button" id="cta-text">
+                РОЗПОЧАТИ ДОСЛІДЖЕННЯ ➔
+            </a>
+        </div>
     </main>
 
-    <footer class="footer" style="text-align: center; padding: 40px; background: #f9f9f9;">
-        <div class="footer__copyright"><p>© 2026 | <b>BH</b> | School History Project</p></div>
+    <footer class="footer">
+        <div class="wrapper">
+            <div class="footer__copyright"><p>BH | School History Project 2026</p></div>
+        </div>
     </footer>
 
     <script>
-        const translations = {
+        const db = {
             ua: {
-                glossaryLabel: "СЛОВНИК ТЕРМІНІВ",
-                timelineHeader: "📜 Петля часу",
-                timelineSub: "Натисніть на ключові дати, щоб розкрити історію",
-                startBtn: "РОЗПОЧАТИ ДОСЛІДЖЕННЯ ➔",
+                label: "Словник термінів",
+                header: "Петля часу",
+                cta: "РОЗПОЧАТИ ДОСЛІДЖЕННЯ ➔",
                 glossary: [
-                    {t: "Гетьманщина", d: "Українська козацька держава XVII-XVIII століть. Мала власну митницю, гроші та дипломатію."},
-                    {t: "Голодомор", d: "Геноцид 1932-33 років. Спроба знищити українство як націю через штучний голод."},
-                    {t: "Валуєвський циркуляр", d: "Акт імперського терору проти мови: «никакого отдельного малороссийского языка не было, нет и быть не может»."},
-                    {t: "Будапештський меморандум", d: "Документ 1994 року. Україна віддала ядерну зброю в обмін на обіцянки миру, які Росія порушила."}
+                    {t: "Гетьманщина", d: "Напівавтономна українська козацька держава. Була ліквідована Російською імперією для встановлення повного контролю."},
+                    {t: "Валуєвський циркуляр", d: "Таємне розпорядження 1863 року, що забороняло друк релігійних та навчальних книг українською мовою."},
+                    {t: "Емський указ", d: "Жорстка заборона української мови в усіх сферах: від театру до перекладів, видана Олександром II у 1876 році."},
+                    {t: "Розстріляне відродження", d: "Покоління українських митців 1920-30-х років, які були знищені сталінським режимом."},
+                    {t: "Голодомор", d: "Акт геноциду проти українського народу. Штучний голод, що забрав мільйони життів у 1932-33 роках."},
+                    {t: "Будапештський меморандум", d: "Документ 1994 року, де Україна відмовилася від ядерної зброї в обмін на гарантії безпеки."}
                 ],
                 timeline: [
-                    {date: "1654", title: "Переяславська рада", desc: "Початок 'союзу' з Москвою, який швидко перетворився на окупацію та обмеження прав."},
-                    {date: "1764", title: "Кінець автономії", desc: "Катерина II ліквідує посаду гетьмана. Україна стає провінцією імперії."},
-                    {date: "1876", title: "Емський указ", desc: "Заборона всього українського в культурі. Спроба культурного вбивства нації."},
-                    {date: "1918", title: "Незалежність УНР", desc: "Перше проголошення суверенної України у XX столітті. Бій під Крутами."},
-                    {date: "1991", title: "Відновлення волі", desc: "Крах СРСР. Україна повертається на карту світу як незалежна держава."},
-                    {date: "2014", title: "Крим та Донбас", desc: "Початок збройної агресії РФ. Порушення всіх міжнародних кордонів."},
-                    {date: "2022", title: "Велика війна", desc: "Спроба остаточного вирішення 'українського питання' агресором. Героїчний опір."}
+                    {date: "1654", title: "Переяславська рада", desc: "Початок союзу, який Москва перетворила на інструмент анексії."},
+                    {date: "1775", title: "Руйнування Січі", desc: "Фізичне знищення центру українського лицарства російськими військами."},
+                    {date: "1918", title: "Незалежність УНР", desc: "Проголошення суверенітету та героїчна оборона від більшовиків."},
+                    {date: "1991", title: "Акт незалежності", desc: "Повернення суверенного статусу після десятиліть радянської окупації."},
+                    {date: "2022", title: "Велика Війна", desc: "Сучасний етап багатовікової петлі: спроба остаточного геноциду."}
                 ]
             },
             en: {
-                glossaryLabel: "HISTORICAL GLOSSARY",
-                timelineHeader: "📜 The Time Loop",
-                timelineSub: "Click on dates to reveal historical context",
-                startBtn: "START RESEARCH ➔",
+                label: "Historical Glossary",
+                header: "The Time Loop",
+                cta: "START EXPLORING ➔",
                 glossary: [
-                    {t: "Hetmanate", d: "The 17th-18th century Ukrainian Cossack state with its own administration and diplomacy."},
-                    {t: "Holodomor", d: "A 1932-33 genocide. An attempt to destroy the Ukrainian nation through man-made famine."},
-                    {t: "Valuev Circular", d: "An 1863 decree claiming the Ukrainian language 'never existed and cannot exist'."},
-                    {t: "Budapest Memorandum", d: "A 1994 agreement where Ukraine traded nuclear weapons for security guarantees."}
+                    {t: "Hetmanate", d: "The Ukrainian Cossack state. It was eventually liquidated by the Russian Empire to enforce centralization."},
+                    {t: "Valuev Circular", d: "An 1863 decree that banned the printing of religious and educational books in Ukrainian."},
+                    {t: "Ems Ukaz", d: "A 1876 ban on the Ukrainian language in public life, including theater and music, issued by Alexander II."},
+                    {t: "Executed Renaissance", d: "A generation of Ukrainian writers and artists of the 1930s murdered by Stalin's regime."},
+                    {t: "Holodomor", d: "A man-made famine (1932-33) and act of genocide that killed millions of Ukrainians."},
+                    {t: "Annexation", d: "The illegal and forcible seizure of territory, as seen in Crimea (2014) and other regions."}
                 ],
                 timeline: [
-                    {date: "1654", title: "Pereyaslav Council", desc: "The start of a 'union' with Moscow that quickly led to imperial absorption."},
-                    {date: "1764", title: "Abolition of Autonomy", desc: "Catherine II abolished the Hetman title, turning Ukraine into a province."},
-                    {date: "1876", title: "Ems Ukaz", desc: "Total ban on the Ukrainian language in culture and education."},
-                    {date: "1918", title: "Independence of UNR", desc: "The first modern proclamation of a sovereign Ukrainian state."},
-                    {date: "1991", title: "Restoration of Liberty", desc: "The collapse of the USSR. Ukraine returns as an independent nation."},
-                    {date: "2014", title: "Crimea & Donbas", desc: "The start of Russian military aggression and border violations."},
-                    {date: "2022", title: "The Great War", desc: "A full-scale attempt by the aggressor to eliminate the Ukrainian state."}
+                    {date: "1654", title: "Pereyaslav Council", desc: "The beginning of a 'union' that Moscow used to absorb Ukraine into the Empire."},
+                    {date: "1775", title: "Destruction of Sich", desc: "Military destruction of the Cossack center by Russian imperial troops."},
+                    {date: "1918", title: "UNR Independence", desc: "Proclamation of sovereignty and the first modern fight for liberty."},
+                    {date: "1991", title: "Independence Act", desc: "Ukraine regains sovereignty after the collapse of the Soviet Union."},
+                    {date: "2022", title: "Full-scale Invasion", desc: "The current phase of the loop: a genocidal attempt to wipe out Ukraine."}
                 ]
             },
             de: {
-                glossaryLabel: "HISTORISCHES GLOSSAR",
-                timelineHeader: "📜 Die Zeitschleife",
-                timelineSub: "Klicken Sie auf die Daten, um den Kontext anzuzeigen",
-                startBtn: "FORSCHUNG STARTEN ➔",
+                label: "Historisches Glossar",
+                header: "Die Zeitschleife",
+                cta: "RESERCH STARTEN ➔",
                 glossary: [
-                    {t: "Hetmanat", d: "Der ukrainische Kosakenstaat des 17. und 18. Jahrhunderts."},
-                    {t: "Holodomor", d: "Völkermord von 1932-33 durch eine künstlich herbeigeführte Hungersnot."},
-                    {t: "Emser Erlass", d: "Ein geheimes Dekret von 1876, das die ukrainische Sprache verbot."},
-                    {t: "Budapester Memorandum", d: "Abkommen von 1994: Verzicht auf Atomwaffen gegen Sicherheitsgarantien."}
+                    {t: "Hetmanat", d: "Der ukrainische Kosakenstaat des 17. und 18. Jahrhunderts. Er wurde vom Russischen Reich liquidiert."},
+                    {t: "Emser Erlass", d: "Ein geheimes Dekret von Zar Alexander II. (1876), das die ukrainische Sprache fast vollständig verbot."},
+                    {t: "Holodomor", d: "Der durch Stalin künstlich herbeigeführte Hungermord an Millionen Ukrainern (1932–1933)."},
+                    {t: "Hingerichtete Renaissance", d: "Eine Generation ukrainischer Intellektueller, die in den 1930er Jahren vom sowjetischen Regime ermordet wurden."},
+                    {t: "Saporoger Sitsch", d: "Das demokratische Zentrum der ukrainischen Kosaken, das 1775 von Russland zerstört wurde."},
+                    {t: "Zentralisierung", d: "Die imperiale Politik Russlands zur Auslöschung der ukrainischen Autonomie und Identität."},
+                    {t: "Waluew-Zirkular", d: "Ein Dekret von 1863, das behauptete, die ukrainische Sprache 'existierte nie, existiert nicht und darf nicht existieren'."}
                 ],
                 timeline: [
-                    {date: "1654", title: "Vertrag von Perejaslaw", desc: "Beginn eines Bündnisses mit Moskau, das zur Besetzung wurde."},
-                    {date: "1764", title: "Ende der Autonomie", desc: "Katharina II. schafft die Selbstverwaltung der Ukraine ab."},
-                    {date: "1876", title: "Emser Erlass", desc: "Verbot der ukrainischen Kultur und Sprache im öffentlichen Raum."},
-                    {date: "1918", title: "Unabhängigkeit", desc: "Die erste moderne Proklamation eines souveränen ukrainischen Staates."},
-                    {date: "1991", title: "Unabhängigkeit", desc: "Zusammenbruch der UdSSR und Rückkehr der Ukraine als Staat."},
-                    {date: "2022", title: "Großer Krieg", desc: "Russlands Versuch, den ukrainischen Staat endgültig zu vernichten."}
+                    {date: "1654", title: "Vertrag von Perejaslaw", desc: "Ein Bündnis mit Moskau, das den Beginn der kaiserlichen Annexion markierte."},
+                    {date: "1775", title: "Zerstörung der Sitsch", desc: "Die Liquidierung des Kosakenstaates durch die Truppen von Katharina II."},
+                    {date: "1918", title: "Unabhängigkeit", desc: "Die erste moderne Proklamation der Souveränität der Ukraine (UNR)."},
+                    {date: "1991", title: "Unabhängigkeit", desc: "Die Wiederherstellung des Staates nach dem Zerfall der Sowjetunion."},
+                    {date: "2022", title: "Invasion", desc: "Der aktuelle Versuch Russlands, die ukrainische Nation endgültig zu vernichten."}
                 ]
             }
         };
 
         let currentLang = 'ua';
-        let termIndex = 0;
+        let termIdx = 0;
 
-        function changeGlobalLang(lang, btn) {
+        function updateAppLang(lang, btn) {
             currentLang = lang;
-            termIndex = 0;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            termIdx = 0;
+            
+            document.querySelectorAll('.lang-trigger').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            document.getElementById('glossary-label').innerText = translations[lang].glossaryLabel;
-            document.getElementById('timeline-header').innerText = translations[lang].timelineHeader;
-            document.getElementById('timeline-sub').innerText = translations[lang].timelineSub;
-            document.getElementById('start-btn-text').innerText = translations[lang].startBtn;
+            document.getElementById('g-label').innerText = db[lang].label;
+            document.getElementById('l-header').innerText = db[lang].header;
+            document.getElementById('cta-text').innerText = db[lang].cta;
 
-            updateGlossary();
+            rotateTerm();
             renderTimeline();
         }
 
-        function updateGlossary() {
-            const card = document.getElementById('glossary-content');
-            card.classList.remove('animate');
-            void card.offsetWidth;
-            card.classList.add('animate');
+        function rotateTerm() {
+            const container = document.getElementById('g-box');
+            container.classList.remove('animate-flux');
+            void container.offsetWidth; 
+            container.classList.add('animate-flux');
 
-            const item = translations[currentLang].glossary[termIndex];
-            document.getElementById('term-title').innerText = item.t;
-            document.getElementById('term-desc').innerText = item.d;
-        }
-
-        function nextTerm() {
-            termIndex = (termIndex + 1) % translations[currentLang].glossary.length;
-            updateGlossary();
+            const item = db[currentLang].glossary[termIdx];
+            document.getElementById('g-title').innerText = item.t;
+            document.getElementById('g-desc').innerText = item.d;
+            
+            termIdx = (termIdx + 1) % db[currentLang].glossary.length;
         }
 
         function renderTimeline() {
-            const list = document.getElementById('timeline-list');
-            list.innerHTML = '';
-            translations[currentLang].timeline.forEach(item => {
-                const det = document.createElement('details');
-                det.className = 'timeline-item animate';
-                det.innerHTML = `
+            const container = document.getElementById('l-container');
+            container.innerHTML = '';
+            db[currentLang].timeline.forEach(item => {
+                const details = document.createElement('details');
+                details.className = 'loop-item animate-flux';
+                details.innerHTML = `
                     <summary>${item.date} — ${item.title}</summary>
-                    <div class="timeline-content">${item.desc}</div>
+                    <div class="loop-content">${item.desc}</div>
                 `;
-                list.appendChild(det);
+                container.appendChild(details);
             });
         }
 
-        window.onload = () => {
-            updateGlossary();
-            renderTimeline();
-        };
+        // Автозапуск
+        window.onload = () => { renderTimeline(); rotateTerm(); };
     </script>
 </body>
 </html>
