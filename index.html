@@ -1,217 +1,258 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>History Project - The Historical Loop</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>School History Project - The Loop of Aggression</title>
+    <link rel="stylesheet" href="https://altsumkanews.github.io/historyproje/assets/css/style.css?v=a0ba884548820066dfadd8416036abba">
+    
+    <style>
+        :root {
+            --ua-gold: #ffd700;
+            --accent-red: #ce1212;
+            --dark-card: #1a1a1a;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
 
-<style>
-:root {
-    --accent-red:#ce1212;
-    --ua-gold:#ffd700;
-    --dark:#121212;
-}
+        .animate-flux { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-body{
-    background:linear-gradient(#121212,#1a1a1a);
-    color:#e0e0e0;
-    font-family:Arial;
-}
+        .custom-wrapper { max-width: 1100px; margin: 0 auto; padding: 20px; }
 
-.glossary-section{
-    background:#1e1e1e;
-    padding:40px;
-    border-radius:20px;
-    margin:30px 0;
-    cursor:pointer;
-    transition:.3s;
-}
-.glossary-section:hover{transform:scale(1.02);}
+        /* Панель мов */
+        .control-panel { display: flex; justify-content: center; gap: 10px; margin: 30px 0; background: #f4f4f4; padding: 10px; border-radius: 50px; }
+        .lang-trigger { border: none; padding: 12px 25px; border-radius: 30px; cursor: pointer; font-weight: 700; background: transparent; transition: 0.3s; }
+        .lang-trigger.active { background: #333; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
-.glossary-title{font-size:2.5em;}
-.glossary-desc{color:#aaa; min-height:80px;}
-.doc-desc{white-space:pre-line; text-align:left; min-height:160px;}
+        /* Глосарії (Терміни та Документи) */
+        .glossary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .card { 
+            background: var(--dark-card); color: white; border-radius: 20px; padding: 40px; 
+            cursor: pointer; transition: 0.3s; position: relative; border: 1px solid rgba(255,255,255,0.1);
+            display: flex; flex-direction: column; justify-content: space-between; min-height: 400px;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-color: var(--ua-gold); }
+        .card-tag { font-size: 0.7em; letter-spacing: 3px; color: var(--ua-gold); text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .card-title { font-size: 2.2em; font-weight: 800; line-height: 1.1; margin-bottom: 15px; }
+        .card-desc { font-size: 1.15em; line-height: 1.6; color: #ccc; flex-grow: 1; }
+        
+        /* Специфічні стилі для цитат */
+        .quote-orig { font-style: italic; color: #888; font-size: 0.95em; border-left: 2px solid var(--accent-red); padding-left: 15px; margin-bottom: 15px; }
+        .quote-trans { color: #eee; font-weight: 500; }
 
-.lang-trigger{
-    padding:10px 20px;
-    border:none;
-    margin:5px;
-    cursor:pointer;
-}
-.active{background:var(--accent-red); color:#fff;}
-</style>
+        /* Хронологія */
+        .loop-header { text-align: center; margin: 60px 0 30px; }
+        .loop-container { border-left: 4px solid #333; padding-left: 35px; margin-left: 20px; }
+        .loop-item { margin-bottom: 20px; list-style: none; }
+        .loop-item summary { padding: 18px; background: white; border: 1px solid #eee; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .loop-item[open] summary { background: #333; color: white; }
+        .loop-content { padding: 20px; background: #fafafa; border-radius: 0 0 12px 12px; line-height: 1.6; }
+
+        .cta-button { display: inline-block; padding: 20px 50px; background: var(--accent-red); color: white !important; border-radius: 50px; text-decoration: none; font-weight: 800; transition: 0.3s; }
+        .cta-button:hover { transform: scale(1.05); }
+    </style>
 </head>
 
 <body>
+    <header class="top js-header">
+        <a class="logo" href="https://altsumkanews.github.io/historyproje/">School History Project</a>
+        <nav class="navbar js-navbar">
+            <ul class="navbar__menu">
+                <li class="active"><a href="https://altsumkanews.github.io/historyproje/">Homepage</a></li>
+                <li><a href="https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html">Вступ</a></li>
+                <li><a href="https://altsumkanews.github.io/historyproje/period-getmanshchini.html">Епохи</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div style="text-align:center; margin-top:40px;">
-<h1>The Historical Loop</h1>
-</div>
+    <main class="custom-wrapper">
+        <div class="control-panel">
+            <button class="lang-trigger active" onclick="updateLang('ua', this)">🇺🇦 UA</button>
+            <button class="lang-trigger" onclick="updateLang('en', this)">🇬🇧 EN</button>
+            <button class="lang-trigger" onclick="updateLang('de', this)">🇩🇪 DE</button>
+        </div>
 
-<div style="text-align:center;">
-<button class="lang-trigger active" onclick="setLang('ua',this)">UA</button>
-<button class="lang-trigger" onclick="setLang('en',this)">EN</button>
-<button class="lang-trigger" onclick="setLang('de',this)">DE</button>
-</div>
+        <div class="glossary-grid">
+            <div class="card" onclick="nextTerm()">
+                <div>
+                    <span id="term-label" class="card-tag">Історичний глосарій</span>
+                    <div id="term-box" class="animate-flux">
+                        <h3 id="term-title" class="card-title">Завантаження...</h3>
+                        <p id="term-desc" class="card-desc">...</p>
+                    </div>
+                </div>
+                <div style="font-size: 0.7em; opacity: 0.5;">Натисніть для наступного терміну ↻</div>
+            </div>
 
-<!-- ТЕРМІНИ -->
-<div class="glossary-section" onclick="nextTerm()">
-<h2 id="g-title">...</h2>
-<p id="g-desc" class="glossary-desc"></p>
-</div>
+            <div class="card" style="border-color: var(--accent-red);" onclick="nextQuote()">
+                <div>
+                    <span id="quote-label" class="card-tag">Архів документів (Цитати)</span>
+                    <div id="quote-box" class="animate-flux">
+                        <h3 id="quote-title" class="card-title">...</h3>
+                        <div id="quote-orig" class="quote-orig"></div>
+                        <div id="quote-trans" class="card-desc quote-trans"></div>
+                    </div>
+                </div>
+                <div style="font-size: 0.7em; opacity: 0.5;">Натисніть для наступного документа ↻</div>
+            </div>
+        </div>
 
-<!-- ДОКУМЕНТИ -->
-<div class="glossary-section" onclick="nextDoc()">
-<h2 id="d-title">...</h2>
-<p id="d-desc" class="doc-desc"></p>
-</div>
+        <div class="loop-header">
+            <h2 id="l-header">Петля часу</h2>
+        </div>
+        <div id="l-container" class="loop-container"></div>
 
-<script>
-const db={
-ua:{
-terms:[
-["Гетьманщина","Козацька держава з власним устроєм."],
-["УНР","Українська Народна Республіка — спроба незалежності 1917."],
-["Центральна Рада","Політичний орган, що очолив відродження державності."],
-["Акт Злуки","Об’єднання українських земель."],
-["Українізація","Відродження культури, згодом знищене СРСР."],
-["Колективізація","Примусове об’єднання селян, що зруйнувало село."],
-["Валуєвський циркуляр","Заборона української мови."],
-["Емський указ","Повна заборона культури."]
-],
-docs:[
-["Валуєвський циркуляр",
-`(орг) «малороссийского языка не было, нет и быть не может»
-(укр) «малоросійської мови не було, немає і бути не може»
-(en) "there was no Little Russian language and there cannot be"`],
+        <div style="text-align: center; margin: 60px 0;">
+            <a href="https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html" class="cta-button" id="cta-text">РОЗПОЧАТИ ДОСЛІДЖЕННЯ ➔</a>
+        </div>
+    </main>
 
-["Емський указ",
-`(орг) «не допускать ввоза книг на малорусском наречии»
-(укр) «заборонити ввезення книг українською»
-(en) "ban import of Ukrainian books"`],
+    <script>
+        const db = {
+            ua: {
+                termLabel: "Історичний глосарій",
+                quoteLabel: "Архів документів (Цитати)",
+                lHeader: "Петля часу",
+                cta: "РОЗПОЧАТИ ДОСЛІДЖЕННЯ ➔",
+                glossary: [
+                    {t: "Гетьманщина", d: "Українська козацька держава, ліквідована Росією для знищення політичної суб'єктності України."},
+                    {t: "УНР", d: "Українська Народна Республіка. Перша спроба незалежності у XX ст., придушена більшовицькою агресією."},
+                    {t: "УЦР", d: "Українська Центральна Рада — перший парламент України, символ боротьби за суверенітет (1917-1918)."},
+                    {t: "Валуєвський циркуляр", d: "Акт лінгвоциду 1863 року, спрямований на заборону української ідентичності."},
+                    {t: "Емський указ", d: "Повна заборона української культури в 1876 році: від театру до перекладів."},
+                    {t: "Голодомор", d: "Геноцид українців 1932-33 рр. Шлях до покори через масове вбивство голодом."},
+                    {t: "Запорозька Січ", d: "Військово-політичний центр козацтва, зруйнований Катериною II у 1775 році."},
+                    {t: "Директорія", d: "Державний орган УНР, що очолив повстання проти гетьмана Скоропадського та воював з більшовиками."},
+                    {t: "Розстріляне відродження", d: "Культурна еліта України 1930-х, фізично знищена СРСР для розриву тяглості культури."},
+                    {t: "Будапештський меморандум", d: "Угода 1994 р., де Україна обміняла зброю на безпеку, яку Росія пізніше цинічно порушила."},
+                    {t: "Дисидентський рух", d: "Мирний опір радянській окупації у 1960-80-х роках, що наблизив незалежність."},
+                    {t: "Акт Злуки", d: "Історичне об'єднання Східної та Західної України в 1919 році в єдину соборну державу."}
+                ],
+                quotes: [
+                    {t: "Валуєвський циркуляр (1863)", o: "«никакого особенного малороссийского языка не было, нет и быть не может»", tr: "«жодної окремої малоросійської мови не було, немає і бути не може»"},
+                    {t: "Емський указ (1876)", o: "«воспретить... печатание и издание на том же наречии...»", tr: "«заборонити... друкування та видання тією ж говіркою... (українською)»"},
+                    {t: "Указ про 'чорні дошки' (1932)", o: "«...немедленно прекратить подвоз товаров, прекратить всякую торговлю...»", tr: "«...негайно припинити підвезення товарів, припинити будь-яку торгівлю... (блокада сіл)»"},
+                    {t: "Промова путіна (2022)", o: "«Украина для нас — это не просто соседняя страна. Это неотъемлемая часть нашей собственной истории...»", tr: "«Україна для нас — це не просто сусідня країна. Це невід'ємна частина нашої власної історії... (заперечення суб'єктності)»"},
+                    {t: "Березневі статті (1654)", o: "«...Войско Запорожское под руку Царского Величества поддаем...»", tr: "«...Військо Запорозьке під руку Царської Величності піддаємо... (початок поглинання)»"}
+                ],
+                timeline: [
+                    {date: "1775", title: "Руйнація Січі", desc: "Остаточне знищення української мілітарної автономії."},
+                    {date: "1918", title: "IV Універсал", desc: "УНР проголошує повну незалежність від Росії."},
+                    {date: "2014", title: "Гібридна агресія", desc: "Анексія Криму та початок війни на Донбасі."},
+                    {date: "2022", title: "Геноцидна війна", desc: "Спроба росії остаточно закрити 'українське питання'."}
+                ]
+            },
+            en: {
+                termLabel: "Historical Glossary",
+                quoteLabel: "Documentary Archive (Quotes)",
+                lHeader: "The Time Loop",
+                cta: "START RESEARCH ➔",
+                glossary: [
+                    {t: "Hetmanate", d: "A Ukrainian Cossack state abolished by Russia to eliminate Ukraine's political sovereignty."},
+                    {t: "UNR", d: "Ukrainian People's Republic. The first attempt at independence in the 20th century, crushed by Bolsheviks."},
+                    {t: "Central Rada", d: "The first parliament of Ukraine, a symbol of the struggle for sovereignty (1917-1918)."},
+                    {t: "Valuev Circular", d: "An 1863 act of linguicide aimed at banning Ukrainian identity and language."},
+                    {t: "Ems Ukaz", d: "A total ban on Ukrainian culture in 1876, covering theater, books, and translations."},
+                    {t: "Holodomor", d: "The 1932-33 genocide of Ukrainians. A path to submission through mass starvation."},
+                    {t: "Zaporizhian Sich", d: "The military-political center of the Cossacks, destroyed by Catherine II in 1775."},
+                    {t: "Directorate", d: "The governing body of the UNR that led the uprising against Hetman Skoropadsky."},
+                    {t: "Executed Renaissance", d: "Ukraine's 1930s cultural elite, physically destroyed by the USSR to break cultural continuity."},
+                    {t: "Budapest Memorandum", d: "A 1994 deal: Ukraine traded nukes for security that Russia later cynically violated."},
+                    {t: "Dissident Movement", d: "Peaceful resistance to Soviet occupation in the 60s-80s that brought independence closer."},
+                    {t: "Act of Unification", d: "The historic 1919 merger of Eastern and Western Ukraine into a single unified state."}
+                ],
+                quotes: [
+                    {t: "Valuev Circular (1863)", o: "«никакого особенного малороссийского языка не было, нет и быть не может»", tr: "«there was, is, and can be no separate Little Russian language»"},
+                    {t: "Ems Ukaz (1876)", o: "«воспретить... печатание и издание на том же наречии...»", tr: "«prohibit... the printing and publishing in the same dialect... (Ukrainian)»"},
+                    {t: "Holodomor Directive (1932)", o: "«...немедленно прекратить подвоз товаров, прекратить всякую торговлю...»", tr: "«...immediately stop the delivery of goods, stop all trade... (starvation blockade)»"},
+                    {t: "Putin's Speech (2022)", o: "«Украина для нас — это не просто соседняя страна. Это неотъемлемая часть нашей собственной истории...»", tr: "«Ukraine for us is not just a neighboring country. It is an integral part of our own history... (denial of statehood)»"},
+                    {t: "Pereyaslav Articles (1654)", o: "«...Войско Запорожское под руку Царского Величества поддаем...»", tr: "«...We submit the Zaporizhian Host under the hand of His Tsarist Majesty... (start of absorption)»"}
+                ],
+                timeline: [
+                    {date: "1775", title: "Destruction of Sich", desc: "The final destruction of Ukrainian military autonomy by Russia."},
+                    {date: "1918", title: "IV Universal", desc: "The UNR declares full independence from Russia."},
+                    {date: "2014", title: "Hybrid Aggression", desc: "Annexation of Crimea and the start of the war in Donbas."},
+                    {date: "2022", title: "Genocidal War", desc: "Russia's attempt to finally solve the 'Ukrainian question'."}
+                ]
+            },
+            de: {
+                termLabel: "Historisches Glossar",
+                quoteLabel: "Dokumentenarchiv (Zitate)",
+                lHeader: "Die Zeitschleife",
+                cta: "RESERCH STARTEN ➔",
+                glossary: [
+                    {t: "Hetmanat", d: "Ein ukrainischer Kosakenstaat, der von Russland liquidiert wurde, um die Souveränität zu vernichten."},
+                    {t: "UNR", d: "Ukrainische Volksrepublik. Der erste Unabhängigkeitsversuch im 20. Jahrhundert, von Bolschewiki zerschlagen."},
+                    {t: "Zentralrada", d: "Das erste Parlament der Ukraine, Symbol des Kampfes um Souveränität (1917-1918)."},
+                    {t: "Waluew-Zirkular", d: "Ein Akt des Linguizids von 1863, der die ukrainische Identität verbieten sollte."},
+                    {t: "Emser Erlass", d: "Ein totales Verbot der ukrainischen Kultur im Jahr 1876, von Theater bis zu Übersetzungen."},
+                    {t: "Holodomor", d: "Genozid an Ukrainern 1932-33. Ein Weg zur Unterwerfung durch Massenhungermord."},
+                    {t: "Saporoger Sitsch", d: "Das militärische Zentrum der Kosaken, das 1775 von Katharina II. zerstört wurde."},
+                    {t: "Direktorium", d: "Regierungsorgan der UNR, das den Aufstand gegen Hetman Skoropadskyj anführte."},
+                    {t: "Hingerichtete Renaissance", d: "Ukrainische Elite der 1930er, die von der UdSSR ermordet wurde, um die Kultur zu brechen."},
+                    {t: "Budapester Memorandum", d: "Abkommen von 1994: Verzicht auf Atomwaffen gegen Sicherheitsgarantien Russlands."},
+                    {t: "Dissidentenbewegung", d: "Friedlicher Widerstand gegen die Sowjetbesatzung, der die Unabhängigkeit näher brachte."},
+                    {t: "Zluka-Akt", d: "Historische Vereinigung der Ost- und Westukraine im Jahr 1919 zu einem unteilbaren Staat."}
+                ],
+                quotes: [
+                    {t: "Waluew-Zirkular (1863)", o: "«никакого особенного малороссийского языка не было, нет и быть не может»", tr: "«es habe keine besondere kleinrussische Sprache gegeben, es gebe sie nicht und könne sie nicht geben»"},
+                    {t: "Emser Erlass (1876)", o: "«воспретить... печатание и издание на том же наречии...»", tr: "«verbieten... das Drucken und Veröffentlichen im selben Dialekt... (Ukrainisch)»"},
+                    {t: "Holodomor-Dekret (1932)", o: "«...немедленно прекратить подвоз товаров, прекратить всякую торговлю...»", tr: "«...sofort die Lieferung von Waren einstellen, jeglichen Handel stoppen... (Hungerblockade)»"},
+                    {t: "Putins Rede (2022)", o: "«Украина для нас — это не просто соседняя страна. Это неотъемлемая часть нашей истории...»", tr: "«Die Ukraine ist für uns nicht nur ein Nachbarland. Sie ist ein integraler Bestandteil unserer eigenen Geschichte...»"},
+                    {t: "Perejaslawer Artikel (1654)", o: "«...Войско Запорожское под руку Царского Величества поддаем...»", tr: "«...Wir unterstellen das Saporoger Heer der Hand Seiner Zarenmajestät... (Beginn der Absorption)»"}
+                ],
+                timeline: [
+                    {date: "1775", title: "Zerstörung der Sitsch", desc: "Die endgültige Vernichtung der ukrainischen Militärautonomie durch Russland."},
+                    {date: "1918", title: "IV. Universal", desc: "Die UNR erklärt die volle Unabhängigkeit von Russland."},
+                    {date: "2014", title: "Hybride Aggression", desc: "Annexion der Krim und Beginn des Krieges im Donbas."},
+                    {date: "2022", title: "Genozidaler Krieg", desc: "Russlands Versuch, die 'ukrainische Frage' endgültig zu lösen."}
+                ]
+            }
+        };
 
-["Політика СРСР",
-`(орг) «русский язык — язык межнационального общения»
-(укр) «російська — мова міжнаціонального спілкування»
-(en) "Russian is the language of interethnic communication"`],
+        let curL = 'ua', tIdx = 0, qIdx = 0;
 
-["Згортання українізації",
-`(орг) «прекратить украинизацию»
-(укр) «припинити українізацію»
-(en) "stop Ukrainization"`],
+        function updateLang(l, b) {
+            curL = l; tIdx = 0; qIdx = 0;
+            document.querySelectorAll('.lang-trigger').forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+            document.getElementById('term-label').innerText = db[l].termLabel;
+            document.getElementById('quote-label').innerText = db[l].quoteLabel;
+            document.getElementById('l-header').innerText = db[l].lHeader;
+            document.getElementById('cta-text').innerText = db[l].cta;
+            nextTerm(); nextQuote(); renderL();
+        }
 
-["Боротьба з націоналізмом",
-`(орг) «бороться с украинским буржуазным национализмом»
-(укр) «боротися з українським націоналізмом»
-(en) "fight Ukrainian nationalism"`]
-]
-},
+        function nextTerm() {
+            const b = document.getElementById('term-box');
+            b.classList.remove('animate-flux'); void b.offsetWidth; b.classList.add('animate-flux');
+            const i = db[curL].glossary[tIdx];
+            document.getElementById('term-title').innerText = i.t;
+            document.getElementById('term-desc').innerText = i.d;
+            tIdx = (tIdx + 1) % db[curL].glossary.length;
+        }
 
-en:{
-terms:[
-["Hetmanate","Cossack state with autonomy."],
-["UNR","Ukrainian People's Republic (1917)."],
-["Central Rada","Revolutionary parliament."],
-["Act of Union","Unification of Ukrainian lands."],
-["Ukrainization","Cultural revival later suppressed."],
-["Collectivization","Forced rural restructuring."],
-["Valuev Circular","Ban on Ukrainian language."],
-["Ems Ukaz","Total cultural ban."]
-],
-docs:[
-["Valuev Circular",
-`(orig) «малороссийского языка не было, нет и быть не может»
-(ua) «малоросійської мови не було...»
-(en) "language does not exist"`],
+        function nextQuote() {
+            const b = document.getElementById('quote-box');
+            b.classList.remove('animate-flux'); void b.offsetWidth; b.classList.add('animate-flux');
+            const i = db[curL].quotes[qIdx];
+            document.getElementById('quote-title').innerText = i.t;
+            document.getElementById('quote-orig').innerText = `(org) ${i.o}`;
+            document.getElementById('quote-trans').innerText = `(переклад) ${i.tr}`;
+            qIdx = (qIdx + 1) % db[curL].quotes.length;
+        }
 
-["Ems Ukaz",
-`(orig) «не допускать ввоза книг»
-(ua) «заборонити книги»
-(en) "ban books"`],
+        function renderL() {
+            const c = document.getElementById('l-container'); c.innerHTML = '';
+            db[curL].timeline.forEach(i => {
+                const d = document.createElement('details'); d.className = 'loop-item animate-flux';
+                d.innerHTML = `<summary>${i.date} — ${i.title}</summary><div class="loop-content">${i.desc}</div>`;
+                c.appendChild(d);
+            });
+        }
 
-["USSR policy",
-`(orig) «русский язык — язык межнационального общения»
-(ua) «російська — мова спілкування»
-(en) "Russian is common language"`],
-
-["End of Ukrainization",
-`(orig) «прекратить украинизацию»
-(ua) «припинити»
-(en) "stop Ukrainization"`],
-
-["Anti-nationalism",
-`(orig) «бороться с национализмом»
-(ua) «боротися»
-(en) "fight nationalism"`]
-]
-},
-
-de:{
-terms:[
-["Hetmanat","Kosakenstaat."],
-["UNR","Ukrainische Volksrepublik."],
-["Zentralrat","Politisches Zentrum 1917."],
-["Akt der Vereinigung","Einheit der Ukraine."],
-["Ukrainisierung","Kulturelle Wiederbelebung."],
-["Kollektivierung","Zwangsreformen."],
-["Waluew-Zirkular","Sprachverbot."],
-["Ems-Erlass","Kulturverbot."]
-],
-docs:[
-["Waluew-Zirkular",
-`(orig) «малороссийского языка не было...»
-(de) „Die Sprache existiert nicht“
-(en) "does not exist"`],
-
-["Ems-Erlass",
-`(orig) «не допускать книг»
-(de) „Bücher verbieten“
-(en) "ban books"`],
-
-["UdSSR Politik",
-`(orig) «русский язык...»
-(de) „Russisch = Hauptsprache“
-(en) "main language"`],
-
-["Ende Ukrainisierung",
-`(orig) «прекратить украинизацию»
-(de) „beenden“
-(en) "stop"`],
-
-["Anti-Nationalismus",
-`(orig) «бороться»
-(de) „kämpfen“
-(en) "fight"`]
-]
-}
-};
-
-let lang="ua";
-let ti=0;
-let di=0;
-
-function setLang(l,btn){
-lang=l; ti=0; di=0;
-document.querySelectorAll('.lang-trigger').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
-render();
-}
-
-function nextTerm(){ti=(ti+1)%db[lang].terms.length; render();}
-function nextDoc(){di=(di+1)%db[lang].docs.length; render();}
-
-function render(){
-let t=db[lang].terms[ti];
-document.getElementById("g-title").innerText=t[0];
-document.getElementById("g-desc").innerText=t[1];
-
-let d=db[lang].docs[di];
-document.getElementById("d-title").innerText=d[0];
-document.getElementById("d-desc").innerText=d[1];
-}
-
-render();
-</script>
-
+        window.onload = () => { updateLang('ua', document.querySelector('.lang-trigger.active')); };
+    </script>
 </body>
 </html>
