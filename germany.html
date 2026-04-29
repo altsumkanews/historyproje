@@ -3,41 +3,56 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Einfluss auf Deutschland</title>
+    <title>Deutschland & Ukraine</title>
     <style>
-        body { background: #fdfdfd; color: #333; font-family: sans-serif; line-height: 1.7; margin: 0; }
-        .header-de { background: #121212; color: white; padding: 60px 20px; text-align: center; }
-        .content { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        .point { margin-bottom: 40px; padding: 20px; border-radius: 10px; background: #f0f0f0; border-left: 5px solid #0057b7; }
-        h2 { color: #ce1212; }
+        body { background: #121212; color: white; font-family: 'Inter', sans-serif; margin: 0; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .lang-nav { display: flex; justify-content: center; gap: 10px; padding: 20px; }
+        .card-de { background: #1e1e1e; border-radius: 20px; padding: 30px; margin-bottom: 20px; border-top: 5px solid #ce1212; transition: 0.3s; }
+        .card-de:hover { transform: translateY(-5px); background: #252525; }
+        h2 { color: #ffd700; margin-top: 0; }
+        .icon { font-size: 2em; margin-bottom: 10px; display: block; }
     </style>
 </head>
 <body>
-    <div class="header-de">
-        <h1>Der Einfluss des Konflikts auf Deutschland</h1>
-        <p>Wie die Ukraine-Krise Deutschland heute verändert</p>
+    <div class="lang-nav">
+        <button onclick="changeL('ua')">🇺🇦 UA</button>
+        <button onclick="changeL('de')">🇩🇪 DE</button>
     </div>
-    <div class="content">
-        <p>Der russisch-ukrainische Krieg ist nicht nur eine lokale Angelegenheit. Er hat die Fundamente der deutschen Politik und Gesellschaft erschüttert.</p>
-
-        <div class="point">
-            <h2>1. Zeitenwende (Die politische Wende)</h2>
-            <p>Nach Jahrzehnten der Annäherung an Russland musste Deutschland seine Sicherheitspolitik komplett überdenken. Die Bundeswehr wird gestärkt, und die deutsche Außenpolitik ist heute entschlossener denn je.</p>
-        </div>
-
-        <div class="point">
-            <h2>2. Energie & Wirtschaft</h2>
-            <p>Die Abkehr von russischem Gas war ein schmerzhafter, aber notwendiger Prozess für die deutsche Industrie. Es hat den Übergang zu erneuerbaren Energien beschleunigt.</p>
-        </div>
-
-        <div class="point">
-            <h2>3. Gesellschaft & Solidarität</h2>
-            <p>Über eine Million ukrainische Geflüchtete haben in Deutschland Schutz gefunden. Die enorme Hilfsbereitschaft in Schulen und Gemeinden hat den gesellschaftlichen Zusammenhalt gestärkt.</p>
-        </div>
-
-        <p style="font-style:italic;">"Deutschlands Schicksal ist heute untrennbar mit der Stabilität Osteuropas verbunden."</p>
-        
-        <a href="index.html" style="color:#0057b7; text-decoration:none; font-weight:bold;">← Zurück zur Hauptseite</a>
+    <div class="container">
+        <h1 id="main-t" style="text-align: center; font-size: 2.5em;">Вплив конфлікту на Німеччину</h1>
+        <div id="cards-container"></div>
     </div>
+
+    <script>
+        const info = {
+            ua: {
+                title: "Вплив конфлікту на Німеччину",
+                cards: [
+                    {i: "🛡️", t: "Zeitenwende (Зміна епох)", d: "Німеччина повністю змінила свою оборонну стратегію та вперше почала масштабно допомагати озброєнням."},
+                    {i: "⚡", t: "Енергетична незалежність", d: "Відмова від російського газу прискорила перехід Німеччини до 'зеленої' енергетики."},
+                    {i: "🤝", t: "Солідарність", d: "Німеччина прийняла понад 1 млн біженців, що стало тестом на людяність для всього суспільства."}
+                ]
+            },
+            de: {
+                title: "Auswirkungen auf Deutschland",
+                cards: [
+                    {i: "🛡️", t: "Zeitenwende", d: "Deutschland hat seine Verteidigungspolitik grundlegend geändert und unterstützt die Ukraine massiv mit Waffen."},
+                    {i: "⚡", t: "Energieunabhängigkeit", d: "Die Abkehr von russischem Gas beschleunigte den Übergang zu erneuerbaren Energien."},
+                    {i: "🤝", t: "Solidarität", d: "Deutschland hat über 1 Million Geflüchtete aufgenommen, was den gesellschaftlichen Zusammenhalt stärkte."}
+                ]
+            }
+        };
+
+        function changeL(l) {
+            document.getElementById('main-t').innerText = info[l].title;
+            const cc = document.getElementById('cards-container');
+            cc.innerHTML = '';
+            info[l].cards.forEach(c => {
+                cc.innerHTML += `<div class="card-de"><span class="icon">${c.i}</span><h2>${c.t}</h2><p>${c.d}</p></div>`;
+            });
+        }
+        window.onload = () => changeL('ua');
+    </script>
 </body>
 </html>
