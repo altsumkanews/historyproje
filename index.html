@@ -12,7 +12,7 @@
             --ua-gold: #ffd700;
             --accent-red: #ce1212;
             --dark-card: #1a1a1a;
-            --deep-blue: #003366;
+            --deep-blue: #0b2447;
         }
 
         .animate-flux { animation: fadeIn 0.5s ease-out; }
@@ -20,28 +20,26 @@
 
         .custom-wrapper { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-        /* Панель мов */
         .control-panel { display: flex; justify-content: center; gap: 10px; margin: 30px 0; background: #f4f4f4; padding: 10px; border-radius: 50px; }
         .lang-trigger { border: none; padding: 12px 25px; border-radius: 30px; cursor: pointer; font-weight: 700; background: transparent; transition: 0.3s; }
         .lang-trigger.active { background: #333; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
-        /* Глосарії (3 колонки) */
-        .glossary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; margin-bottom: 50px; }
+        .glossary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; margin-bottom: 50px; }
         .card { 
             background: var(--dark-card); color: white; border-radius: 20px; padding: 30px; 
             cursor: pointer; transition: 0.3s; position: relative; border: 1px solid rgba(255,255,255,0.1);
-            display: flex; flex-direction: column; justify-content: space-between; min-height: 450px;
+            display: flex; flex-direction: column; justify-content: space-between; min-height: 520px;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--ua-gold); }
-        .card-tag { font-size: 0.7em; letter-spacing: 3px; color: var(--ua-gold); text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .card-title { font-size: 1.8em; font-weight: 800; line-height: 1.2; margin-bottom: 15px; }
-        .card-desc { font-size: 1.05em; line-height: 1.6; color: #ccc; flex-grow: 1; }
+        .card:hover { transform: translateY(-5px); border-color: var(--ua-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .card-tag { font-size: 0.75em; letter-spacing: 2px; color: var(--ua-gold); text-transform: uppercase; margin-bottom: 15px; display: block; font-weight: bold; }
+        .card-title { font-size: 1.8em; font-weight: 800; line-height: 1.2; margin-bottom: 20px; min-height: 2.4em; display: flex; align-items: center; }
+        .card-desc { font-size: 1.05em; line-height: 1.6; color: #d1d1d1; flex-grow: 1; }
         
-        .quote-orig { font-style: italic; color: #888; font-size: 0.9em; border-left: 2px solid var(--accent-red); padding-left: 15px; margin-bottom: 10px; }
-        .quote-trans { color: #eee; font-weight: 500; font-size: 1em; }
-        .hint-text { font-size: 0.7em; opacity: 0.5; margin-top: 20px; text-transform: uppercase; }
+        .label-sub { font-size: 0.7em; color: var(--ua-gold); text-transform: uppercase; margin-top: 15px; margin-bottom: 5px; font-weight: bold; }
+        .quote-orig { font-style: italic; color: #a0a0a0; font-size: 0.95em; border-left: 3px solid var(--accent-red); padding-left: 15px; margin-bottom: 15px; line-height: 1.4; }
+        .quote-trans { color: #ffffff; font-weight: 500; font-size: 1.05em; line-height: 1.5; }
+        .hint-text { font-size: 0.75em; opacity: 0.6; margin-top: 25px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
 
-        /* Хронологія */
         .loop-header { text-align: center; margin: 60px 0 30px; }
         .loop-container { border-left: 4px solid #333; padding-left: 35px; margin-left: 20px; }
         .loop-item { margin-bottom: 20px; list-style: none; }
@@ -49,7 +47,7 @@
         .loop-item[open] summary { background: #333; color: white; }
 
         .cta-button { display: inline-block; padding: 20px 50px; background: var(--accent-red); color: white !important; border-radius: 50px; text-decoration: none; font-weight: 800; transition: 0.3s; }
-        .cta-button:hover { transform: scale(1.05); }
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(206, 18, 18, 0.4); }
     </style>
 </head>
 
@@ -91,21 +89,21 @@
 
             <div class="card" onclick="nextQuote()">
                 <div>
-                    <span id="label-docs" class="card-tag">Документи</span>
+                    <span id="label-docs" class="card-tag">Архів документів</span>
                     <div id="quote-box" class="animate-flux">
                         <h3 id="quote-title" class="card-title">...</h3>
-                        <div id="q-orig-label" style="font-size: 0.7em; color: var(--ua-gold);">(орг)</div>
+                        <div id="q-orig-label" class="label-sub"></div>
                         <div id="quote-orig" class="quote-orig"></div>
-                        <div id="q-trans-label" style="font-size: 0.7em; color: var(--ua-gold);">(переклад)</div>
+                        <div id="q-trans-label" class="label-sub"></div>
                         <div id="quote-trans" class="quote-trans"></div>
                     </div>
                 </div>
                 <div id="hint-docs" class="hint-text">...</div>
             </div>
 
-            <div class="card" style="border-color: var(--deep-blue);" onclick="nextProp()">
+            <div class="card" style="border-color: #1e5128;" onclick="nextProp()">
                 <div>
-                    <span id="label-prop" class="card-tag">Правда vs Пропаганда</span>
+                    <span id="label-prop" class="card-tag">Міфи vs Факти</span>
                     <div id="prop-box" class="animate-flux">
                         <h3 id="prop-title" class="card-title">...</h3>
                         <p id="prop-desc" class="card-desc">...</p>
@@ -129,74 +127,119 @@
         const db = {
             ua: {
                 lTerms: "Історичний глосарій", lDocs: "Архів документів", lProp: "Історична правда",
-                hHint: "Натисніть, щоб змінити ↻", lOrig: "(орг)", lTrans: "(переклад)",
+                hHint: "Натисніть для перегляду наступного ↻", lOrig: "Оригінал (орг)", lTrans: "Переклад (перекладено)",
                 lHeader: "Петля часу", cta: "РОЗПОЧАТИ ДОСЛІДЖЕННЯ ➔",
                 glossary: [
-                    {t: "Гетьманщина", d: "Українська держава XVII-XVIII ст., яку Росія поступово ліквідувала, порушуючи всі угоди про автономію."},
-                    {t: "УЦР", d: "Українська Центральна Рада (1917-1918) — перший парламент, що відродив державність після розпаду імперії."},
-                    {t: "УНР", d: "Українська Народна Республіка. Стала жертвою більшовицької навали, що призвела до 70-річної окупації СРСР."},
-                    {t: "Емський указ", d: "Жорстока заборона всього українського в 1876 році: від книг до виступів у театрах."},
-                    {t: "Голодомор", d: "Геноцид 1932-33 рр. Сталін використав голод як зброю для приборкання спротиву українців."},
-                    {t: "Акт Злуки", d: "1919 рік. Символ єдності Сходу та Заходу України в одну соборну державу."}
+                    {t: "Гетьманщина", d: "Українська козацька держава XVII-XVIII ст., суб'єктність якої поступово обмежувалася та була остаточно ліквідована Російською імперією."},
+                    {t: "УНР (Українська Народна Республіка)", d: "Незалежна держава (1917–1921), що постала після розпаду імперії та вела збройну боротьбу проти більшовицької агресії."},
+                    {t: "Українська Центральна Рада", d: "Перший український парламент XX століття, політичний орган, що проголосив суверенітет України в ході революції."},
+                    {t: "Директорія УНР", d: "Вищий орган державної влади, який очолив повстання проти гетьмана Скоропадського та продовжував оборону проти радянської Росії."},
+                    {t: "Голодомор (1932–1933)", d: "Штучно організований радянською владою голод, визнаний актом геноциду українського народу з метою знищення соціальної бази опору."},
+                    {t: "Розстріляне відродження", d: "Духовно-культурна еліта України 1920-х та 30-х років, яка була фізично знищена сталінським режимом."},
+                    {t: "Акт Злуки", d: "Історичний документ про об'єднання УНР та ЗУНР у 1919 році, символ ідеї соборності та цілісності українських земель."}
                 ],
                 quotes: [
-                    {t: "Валуєвський циркуляр (1863)", o: "«никакого особенного малороссийского языка не было, нет и быть не может»", tr: "«жодної окремої малоросійської мови не було, немає і бути не може»"},
-                    {t: "Емський указ (1876)", o: "«воспретить... печатание на том же наречии...»", tr: "«заборонити... друкування тією ж говіркою... (українською)»"},
-                    {t: "Промова путіна (2022)", o: "«Украина... созданная россией...»", tr: "«Україна... створена росією... (абсурдне заперечення історії)»"}
+                    {t: "Валуєвський циркуляр (1863)", o: "«...никакого особенного малороссийского языка не было, нет и быть не может...»", tr: "«...жодної окремої малоросійської мови не було, немає і бути не може...»"},
+                    {t: "Емський указ (1876)", o: "«...воспретить ввозить в пределы Империи... какие бы то ни было книги и брошюры, издаваемые за границей на малороссийском наречии.»", tr: "«...заборонити ввезення в межі Імперії... будь-яких книг і брошур, що видаються за кордоном малоросійською говіркою.»"},
+                    {t: "Наказ про 'чорні дошки' (1932)", o: "«...занести на черную доску... прекратить всякую торговлю, как государственную, так и кооперативную...»", tr: "«...занести на чорну дошку... припинити будь-яку торгівлю, як державну, так і кооперативну... (блокада постачання їжі)»"},
+                    {t: "Промова путіна (2022)", o: "«...современная Украина целиком и полностью была создана Россией, точнее, большевистской, коммунистической Россией.»", tr: "«...сучасна Україна цілком і повністю була створена Росією, точніше, більшовицькою, комуністичною Росією.»"},
+                    {t: "Переяславські статті (1654)", o: "«...чтобы подтверждено было ими право... под руку Царского Величества...»", tr: "«...щоб підтверджено було ними право... під руку Царської Величності... (початок обмеження автономії)»"}
                 ],
                 propaganda: [
-                    {t: "Крадіжка назви 'Русь'", d: "У 1721 році Петро I перейменував Московське царство на 'росію', щоб вкрасти багатовікову історію Києва та Русі."},
-                    {t: "Русини — це українці", d: "Самоназва українців протягом століть була 'русини'. Московія привласнила це слово, перетворивши на 'русский'."},
-                    {t: "Міф про 'Малоросію'", d: "Термін вигаданий імперією, щоб принизити статус України до рівня 'меншої' частини єдиного народу."},
-                    {t: "Київ старший за Москву", d: "Коли Київ був центром цивілізації та християнства, на місці Москви були болота та ліси."}
+                    {t: "Перейменування Московії", d: "У 1721 році Петро I офіційно змінив назву Московського царства на 'Російську імперію', претендуючи на історичну спадщину Русі з центром у Києві."},
+                    {t: "Термін 'Русини'", d: "Це самоназва українців протягом століть (включаючи часи ВКЛ та Речі Посполитої). Московія привласнила етнонім 'руські', змінивши його значення на власну користь."},
+                    {t: "Концепт 'Малоросії'", d: "Штучний термін, запроваджений для позначення українських земель як периферії імперії, заперечуючи їхню національну та державну окремішність."},
+                    {t: "Міф про 'Спільну колиску'", d: "Історична маніпуляція, що стверджує про єдине походження росіян та українців, ігноруючи різні етнічні коріння та розвиток державних традицій."},
+                    {t: "Київ vs Москва", d: "Археологічні та літописні дані підтверджують, що Київ був сформованим центром цивілізації та християнства задовго до заснування Москви у 1147 році."}
                 ],
-                timeline: [{date: "1775", title: "Руйнація Січі", desc: "Кінець мілітарної волі."}, {date: "2022", title: "Вторгнення", desc: "Пік петлі агресії."}]
+                timeline: [
+    {date: "1654", title: "Березневі статті", desc: "Початок поступового поглинання України Московським царством через обмеження прав козацтва."},
+    {date: "1709", title: "Трагедія Батурина", desc: "Знищення гетьманської столиці та масове вбивство цивільних як помста за союз Мазепи зі Швецією."},
+    {date: "1775", title: "Руйнація Січі", desc: "Остаточна ліквідація козацької автономії та військового устрою за наказом Катерини II."},
+    {date: "1876", title: "Емський указ", desc: "Тотальне витіснення української мови з публічного простору, науки та друку на рівні закону."},
+    {date: "1918", title: "Бій під Крутами", desc: "Героїчний опір української молоді більшовицькій навалі, що наступала на Київ."},
+    {date: "1932-33", title: "Голодомор", desc: "Акт геноциду, спрямований на фізичне знищення українського селянства та придушення національного духу."},
+    {date: "1991", title: "Відновлення Незалежності", desc: "Вихід зі складу СРСР та повернення суверенного статусу після десятиліть окупації."},
+    {date: "2014", title: "Окупація Криму", desc: "Початок сучасної збройної агресії РФ, порушення територіальної цілісності та міжнародного права."},
+    {date: "2022", title: "Велике вторгнення", desc: "Сучасна фаза багатовікової політики росії: спроба остаточного знищення української державності."}
+]
             },
             en: {
                 lTerms: "Historical Glossary", lDocs: "Documentary Archive", lProp: "Historical Truth",
-                hHint: "Click to rotate ↻", lOrig: "(orig)", lTrans: "(translation)",
+                hHint: "Click to rotate ↻", lOrig: "Original (org)", lTrans: "Translation (translated)",
                 lHeader: "The Time Loop", cta: "START RESEARCH ➔",
                 glossary: [
-                    {t: "Hetmanate", d: "Ukrainian state of the 17th-18th centuries, gradually liquidated by Russia, violating all autonomy agreements."},
-                    {t: "Central Rada", d: "The first parliament (1917-1918) that revived statehood after the fall of the empire."},
-                    {t: "UNR", d: "Ukrainian People's Republic. Fell victim to Bolshevik invasion, leading to 70 years of Soviet occupation."},
-                    {t: "Ems Ukaz", d: "A 1876 ban on everything Ukrainian: from books to theatrical performances."},
-                    {t: "Holodomor", d: "The 1932-33 genocide. Stalin used famine as a weapon to suppress Ukrainian resistance."}
+                    {t: "Hetmanate", d: "A Ukrainian Cossack state of the 17th-18th centuries. Its sovereignty was gradually restricted and finally liquidated by the Russian Empire."},
+                    {t: "UNR (Ukrainian People's Republic)", d: "An independent state (1917–1921) that emerged after the collapse of the empire and fought against Bolshevik aggression."},
+                    {t: "Central Rada", d: "The first Ukrainian parliament of the 20th century, a political body that proclaimed Ukraine's sovereignty during the revolution."},
+                    {t: "Directorate of the UNR", d: "The supreme state authority that led the uprising against Hetman Skoropadsky and continued the defense against Soviet Russia."},
+                    {t: "Holodomor (1932–1933)", d: "A man-made famine organized by the Soviet authorities, recognized as an act of genocide against the Ukrainian people."},
+                    {t: "Executed Renaissance", d: "The spiritual and cultural elite of Ukraine in the 1920s and 30s, who were physically destroyed by the Stalinist regime."},
+                    {t: "Act of Unification", d: "A 1919 document on the merger of the UNR and the ZUNR into a single unified state, a symbol of Ukrainian integrity."}
                 ],
                 quotes: [
-                    {t: "Valuev Circular (1863)", o: "«никакого особенного малороссийского языка не было, нет и быть не может»", tr: "«there was, is, and can be no separate Little Russian language»"},
-                    {t: "Putin's Speech (2022)", o: "«Украина... созданная россией...»", tr: "«Ukraine... created by Russia... (absurd denial of history)»"}
+                    {t: "Valuev Circular (1863)", o: "«...никакого особенного малороссийского языка не было, нет и быть не может...»", tr: "«...there was, is, and can be no separate Little Russian language...»"},
+                    {t: "Ems Ukaz (1876)", o: "«...воспретить ввозить в пределы Империи... какие бы то ни было книги на малороссийском наречии.»", tr: "«...to prohibit the import into the Empire... of any books published abroad in the Little Russian dialect.»"},
+                    {t: "Blackboards Decree (1932)", o: "«...to place on the blackboard... cease all trade, both state and cooperative...»", tr: "«...to place on the blackboard... cease all trade... (total food blockade of Ukrainian villages)»"},
+                    {t: "Putin's Speech (2022)", o: "«...modern Ukraine was entirely and completely created by Russia...»", tr: "«...modern Ukraine was entirely and completely created by Russia, or rather, Bolshevik, Communist Russia.»"},
+                    {t: "Pereyaslav Articles (1654)", o: "«...the Zaporizhian Host under the hand of His Tsarist Majesty...»", tr: "«...the Zaporizhian Host under the hand of His Tsarist Majesty... (the start of the loss of autonomy)»"}
                 ],
                 propaganda: [
-                    {t: "Theft of 'Rus' Name", d: "In 1721, Peter I renamed Muscovy to 'Russia' to steal the centuries-old history of Kyiv and Rus'."},
-                    {t: "Rusyns are Ukrainians", d: "For centuries, Ukrainians called themselves 'Rusyns'. Muscovy appropriated the name to claim legitimacy."},
-                    {t: "The 'Malorossiya' Myth", d: "A colonial term invented to diminish Ukraine's status to a 'lesser' part of one nation."},
-                    {t: "Kyiv is older than Moscow", d: "When Kyiv was a center of civilization, Moscow's site was just swamps and forests."}
+                    {t: "Renaming of Muscovy", d: "In 1721, Peter I officially changed the name from 'Tsardom of Muscovy' to 'Russian Empire' to claim the historical legacy of Kyiv and Rus'."},
+                    {t: "The Term 'Rusyn'", d: "This was the self-identification of Ukrainians for centuries. Muscovy appropriated the ethnonym 'Russkiy' to justify its imperial expansion."},
+                    {t: "Concept of 'Little Russia'", d: "A colonial term introduced to treat Ukrainian lands as a peripheral part of the empire, denying their distinct national identity."},
+                    {t: "Myth of 'Common Cradle'", d: "A manipulation claiming a single origin for Russians and Ukrainians, ignoring different ethnic roots and state traditions."},
+                    {t: "Kyiv vs Moscow", d: "Evidence confirms that Kyiv was an established center of civilization and Christianity long before the founding of Moscow in 1147."}
                 ],
-                timeline: [{date: "1775", title: "Destruction of Sich", desc: "End of military freedom."}, {date: "2022", title: "Invasion", desc: "Peak of aggression loop."}]
-            },
+               timeline: [
+    {date: "1654", title: "Pereyaslav Articles", desc: "The start of Ukraine's gradual absorption by the Tsardom of Muscovy through the restriction of Cossack rights."},
+    {date: "1709", title: "Sack of Baturyn", desc: "The destruction of the Hetman capital and mass murder of civilians as revenge for Mazepa's alliance with Sweden."},
+    {date: "1775", title: "Destruction of Sich", desc: "Final liquidation of Cossack autonomy and their military system by order of Catherine II."},
+    {date: "1876", title: "Ems Ukaz", desc: "Total displacement of the Ukrainian language from the public sphere, science, and printing at the legislative level."},
+    {date: "1918", title: "Battle of Kruty", desc: "Heroic resistance of Ukrainian youth against the Bolshevik invasion advancing on Kyiv."},
+    {date: "1932-33", title: "Holodomor", desc: "An act of genocide aimed at the physical destruction of the Ukrainian peasantry to suppress national resistance."},
+    {date: "1991", title: "Restoration of Independence", desc: "Ukraine leaves the USSR and regains its sovereign status after decades of occupation."},
+    {date: "2014", title: "Crimea Occupation", desc: "The beginning of modern Russian armed aggression and violation of international law."},
+    {date: "2022", title: "Full-scale Invasion", desc: "The modern phase of a centuries-long policy: an attempt to finally destroy Ukrainian statehood."}
+]
             de: {
                 lTerms: "Historisches Glossar", lDocs: "Dokumentenarchiv", lProp: "Historische Wahrheit",
-                hHint: "Klicken zum Wechseln ↻", lOrig: "(orig)", lTrans: "(Übersetzung)",
-                lHeader: "Zeitschleife", cta: "RESERCH STARTEN ➔",
+                hHint: "Klicken zum Wechseln ↻", lOrig: "Original (org)", lTrans: "Übersetzung (übersetzt)",
+                lHeader: "Die Zeitschleife", cta: "RESERCH STARTEN ➔",
                 glossary: [
-                    {t: "Hetmanat", d: "Ukrainischer Staat des 17. und 18. Jahrhunderts, der von Russland unter Bruch aller Verträge liquidiert wurde."},
-                    {t: "Zentralrada", d: "Das erste Parlament (1917-1918), das die Staatlichkeit nach dem Zerfall des Reiches wiederbelebte."},
-                    {t: "UNR", d: "Ukrainische Volksrepublik. Opfer der bolschewistischen Invasion, die zur 70-jährigen sowjetischen Besatzung führte."},
-                    {t: "Emser Erlass", d: "Ein Verbot (1876) von allem Ukrainischen: von Büchern bis zu Theateraufführungen."},
-                    {t: "Holodomor", d: "Genozid 1932-33. Stalin nutzte den Hunger als Waffe gegen den ukrainischen Widerstand."}
+                    {t: "Hetmanat", d: "Ein ukrainischer Kosakenstaat des 17.-18. Jh., dessen Souveränität schrittweise eingeschränkt und vom Russischen Reich liquidiert wurde."},
+                    {t: "UNR (Ukrainische Volksrepublik)", d: "Ein unabhängiger Staat (1917–1921), der nach dem Zerfall des Reiches entstand und gegen die bolschewistische Aggression kämpfte."},
+                    {t: "Zentralrada", d: "Das erste ukrainische Parlament des 20. Jahrhunderts, das die Souveränität der Ukraine während der Revolution proklamierte."},
+                    {t: "Direktorium der UNR", d: "Das höchste Staatsorgan, das den Aufstand gegen Hetman Skoropadskyj anführte und die Verteidigung gegen Sowjetrussland fortsetzte."},
+                    {t: "Holodomor (1932–1933)", d: "Eine von den sowjetischen Behörden organisierte Hungersnot, die als Völkermord an der ukrainischen Bevölkerung anerkannt ist."},
+                    {t: "Hingerichtete Renaissance", d: "Die geistige und kulturelle Elite der Ukraine der 1920er und 30er Jahre, die vom stalinistischen Regime physisch vernichtet wurde."},
+                    {t: "Zluka-Akt", d: "Ein historisches Dokument von 1919 über die Vereinigung der UNR und ZUNR zu einem unteilbaren ukrainischen Staat."}
                 ],
                 quotes: [
-                    {t: "Waluew-Zirkular (1863)", o: "«никакого особенного малороссийского языка не было, нет и быть не может»", tr: "«es habe keine besondere kleinrussische Sprache gegeben, es gebe sie nicht...»"},
-                    {t: "Putins Rede (2022)", o: "«Украина... созданная россией...»", tr: "«Ukraine... von Russland geschaffen... (absurde Leugnung der Geschichte)»"}
+                    {t: "Waluew-Zirkular (1863)", o: "«...никакого особенного малороссийского языка не было, нет и быть не может...»", tr: "«...es habe keine besondere kleinrussische Sprache gegeben, es gebe sie nicht und könne sie nicht geben...»"},
+                    {t: "Emser Erlass (1876)", o: "«...воспретить ввозить в пределы Империи... книги на малороссийском наречии.»", tr: "«...die Einfuhr von Büchern in die Reichsgrenzen... in kleinrussischer Mundart zu verbieten.»"},
+                    {t: "Dekret über 'Schwarze Brett' (1932)", o: "«...auf das schwarze Brett setzen... jeglichen Handel einstellen...»", tr: "«...auf das schwarze Brett setzen... jeglichen Handel einstellen... (Totale Blockade der Lebensmittelversorgung)»"},
+                    {t: "Putins Rede (2022)", o: "«...современная Украина была создана Россией...»", tr: "«...die moderne Ukraine wurde vollständig von Russland geschaffen, genauer gesagt, vom bolschewistischen Russland.»"},
+                    {t: "Perejaslawer Artikel (1654)", o: "«...unter die Hand Seiner Zarenmajestät...»", tr: "«...unter die Hand Seiner Zarenmajestät... (Beginn der Einschränkung der ukrainischen Autonomie)»"}
                 ],
                 propaganda: [
-                    {t: "Raub des Namens 'Rus'", d: "1721 benannte Peter I. das Moskauer Reich in 'Russland' um, um die Geschichte von Kiew zu stehlen."},
-                    {t: "Rusynen sind Ukrainer", d: "Jahrhundertelang nannten sich Ukrainer 'Rusynen'. Moskau eignete sich den Namen an, um Machtansprüche zu rechtfertigen."},
-                    {t: "Der 'Malorossija'-Mythos", d: "Ein kolonialer Begriff, um die Ukraine zu einem 'kleineren' Teil eines Volkes herabzustufen."},
-                    {t: "Kiew ist älter als Moskau", d: "Als Kiew ein Zentrum der Zivilisation war, gab es an der Stelle Moskaus nur Sümpfe."}
+                    {t: "Umbenennung Moskowiens", d: "1721 änderte Peter I. offiziell den Namen des Zarentums Moskau in 'Russisches Kaiserreich', um das Erbe der Kyjiwer Rus' zu beanspruchen."},
+                    {t: "Der Begriff 'Rusynen'", d: "Dies war jahrhundertelang die Eigenbezeichnung der Ukrainer. Moskowien eignete sich das Ethnonym 'Russen' an, um imperiale Ansprüche zu rechtfertigen."},
+                    {t: "Das 'Malorossija'-Konzept", d: "Ein kolonialer Begriff, um ukrainische Gebiete als Peripherie des Reiches zu definieren und ihre nationale Eigenständigkeit zu leugnen."},
+                    {t: "Mythos der 'Gemeinsamen Wiege'", d: "Historische Manipulation, die einen einzigen Ursprung von Russen und Ukrainern behauptet und unterschiedliche ethnische Wurzeln ignoriert."},
+                    {t: "Kyjiw vs. Moskau", d: "Historische Daten bestätigen, dass Kyjiw lange vor der Gründung Moskaus im Jahr 1147 ein etabliertes Zentrum der Zivilisation und des Christentums war."}
                 ],
-                timeline: [{date: "1775", title: "Zerstörung der Sitsch", desc: "Ende der militärischen Freiheit."}, {date: "2022", title: "Invasion", desc: "Gipfel der Aggressionsschleife."}]
+              timeline: [
+    {date: "1654", title: "Perejaslawer Artikel", desc: "Beginn der schrittweisen Eingliederung der Ukraine in das Zarentum Moskau durch die Einschränkung der Kosakenrechte."},
+    {date: "1709", title: "Tragödie von Baturyn", desc: "Zerstörung der Hetman-Hauptstadt und Massenmord an Zivilisten als Rache für Masepas Bündnis mit Schweden."},
+    {date: "1775", title: "Zerstörung der Sitsch", desc: "Endgültige Liquidation der kosakischen Autonomie und ihres Militärsystems auf Befehl von Katharina II."},
+    {date: "1876", title: "Emser Erlass", desc: "Vollständige Verdrängung der ukrainischen Sprache aus der Öffentlichkeit, Wissenschaft und dem Druckwesen auf Gesetzesebene."},
+    {date: "1918", title: "Schlacht bei Kruty", desc: "Heroischer Widerstand der ukrainischen Jugend gegen die auf Kyjiw vorrückende bolschewistische Invasion."},
+    {date: "1932-33", title: "Holodomor", desc: "Ein Völkermord zur physischen Vernichtung der ukrainischen Bauernschaft und zur Unterdrückung des nationalen Geistes."},
+    {date: "1991", title: "Wiederherstellung der Unabhängigkeit", desc: "Austritt aus der UdSSR und Rückkehr zum souveränen Status nach Jahrzehnten der Besatzung."},
+    {date: "2014", title: "Krim-Okkupation", desc: "Beginn der modernen russischen bewaffneten Aggression und Verletzung des Völkerrechts."},
+    {date: "2022", title: "Große Invasion", desc: "Die moderne Phase einer jahrhundertelangen Politik: der Versuch, die ukrainische Staatlichkeit endgültig zu vernichten."}
+]
             }
         };
 
@@ -225,6 +268,8 @@
         }
 
         function nextTerm() {
+            const b = document.getElementById('term-box');
+            b.classList.remove('animate-flux'); void b.offsetWidth; b.classList.add('animate-flux');
             const i = db[curL].glossary[tI];
             document.getElementById('term-title').innerText = i.t;
             document.getElementById('term-desc').innerText = i.d;
@@ -232,6 +277,8 @@
         }
 
         function nextQuote() {
+            const b = document.getElementById('quote-box');
+            b.classList.remove('animate-flux'); void b.offsetWidth; b.classList.add('animate-flux');
             const i = db[curL].quotes[qI];
             document.getElementById('quote-title').innerText = i.t;
             document.getElementById('quote-orig').innerText = i.o;
@@ -240,6 +287,8 @@
         }
 
         function nextProp() {
+            const b = document.getElementById('prop-box');
+            b.classList.remove('animate-flux'); void b.offsetWidth; b.classList.add('animate-flux');
             const i = db[curL].propaganda[pI];
             document.getElementById('prop-title').innerText = i.t;
             document.getElementById('prop-desc').innerText = i.d;
