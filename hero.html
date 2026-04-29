@@ -4,32 +4,117 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Ivan Mazepa - The Historical Loop</title>
-    <link rel="stylesheet" href="https://altsumkanews.github.io/historyproje/assets/css/style.css?v=a0ba884548820066dfadd8416036abba">
     <style>
-        :root { --ua-gold: #ffd700; --card-bg: #1e1e1e; }
-        body { background: #121212; color: #e0e0e0; }
-        .top { padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(18,18,18,0.95); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-weight: 900; color: #fff; text-decoration: none; }
-        .hero-header { height: 45vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Ivan_Mazepa.jpg') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 2px solid var(--ua-gold); }
-        .container { max-width: 850px; margin: -40px auto 60px; background: var(--card-bg); padding: 40px; border-radius: 20px; border: 1px solid #333; position: relative; }
-        .lang-btns { text-align: center; margin-bottom: 20px; }
-        .l-btn { background: transparent; border: 1px solid var(--ua-gold); color: var(--ua-gold); padding: 5px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px; }
-        .l-btn.active { background: var(--ua-gold); color: #000; }
-        .ach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0; }
-        .ach-card { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; border-left: 4px solid var(--ua-gold); }
-        h1, h2 { color: var(--ua-gold); }
+        :root { 
+            --ua-gold: #ffd700; 
+            --card-bg: #1e1e1e; 
+            --text-main: #e0e0e0;
+            --transition: all 0.3s ease;
+        }
+        body { 
+            background: #121212; 
+            color: var(--text-main); 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+        .top { 
+            padding: 15px 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(18,18,18,0.98); 
+            border-bottom: 1px solid #333; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+        .logo { font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 1px; }
+        
+        .hero-header { 
+            height: 50vh; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Ivan_Mazepa.jpg') center/50% no-repeat;
+            background-size: cover;
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            border-bottom: 3px solid var(--ua-gold); 
+        }
+        
+        .container { 
+            max-width: 900px; 
+            margin: -60px auto 60px; 
+            background: var(--card-bg); 
+            padding: 50px; 
+            border-radius: 20px; 
+            border: 1px solid #333; 
+            position: relative; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .lang-btns { text-align: center; margin-bottom: 30px; }
+        .l-btn { 
+            background: transparent; 
+            border: 1px solid var(--ua-gold); 
+            color: var(--ua-gold); 
+            padding: 8px 20px; 
+            border-radius: 25px; 
+            cursor: pointer; 
+            margin: 0 5px; 
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        .l-btn.active, .l-btn:hover { background: var(--ua-gold); color: #000; }
+
+        .ach-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+            margin: 40px 0; 
+        }
+        .ach-card { 
+            background: rgba(255,255,255,0.05); 
+            padding: 25px; 
+            border-radius: 12px; 
+            border-left: 4px solid var(--ua-gold);
+            transition: var(--transition);
+        }
+        .ach-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+        
+        h1, h2 { color: var(--ua-gold); margin-top: 0; }
         .navbar__menu { display: flex; list-style: none; gap: 20px; margin: 0; }
-        .navbar__menu a { color: white; text-decoration: none; font-size: 0.9em; font-weight: 600; }
+        .navbar__menu a { color: white; text-decoration: none; font-size: 0.9em; font-weight: 600; opacity: 0.8; }
+        .navbar__menu a:hover { opacity: 1; color: var(--ua-gold); }
+
+        .analysis-box {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px dashed var(--ua-gold);
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container { margin: 0; border-radius: 0; padding: 20px; }
+            .hero-header { height: 35vh; }
+        }
     </style>
 </head>
 <body>
     <header class="top">
-        <a class="logo" href="index.html">History Project</a>
-        <nav><ul class="navbar__menu"><li><a href="index.html">Головна</a></li><li><a href="sources.html">Джерела</a></li></ul></nav>
+        <a class="logo" href="index.html">HISTORY PROJECT</a>
+        <nav><ul class="navbar__menu">
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="sources.html">Джерела</a></li>
+        </ul></nav>
     </header>
 
     <div class="hero-header">
-        <h1 id="h-name" style="font-size: 3.5em;">Іван Мазепа</h1>
+        <h1 id="h-name" style="font-size: 3.5em; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">Іван Мазепа</h1>
     </div>
 
     <main class="container">
@@ -38,12 +123,71 @@
             <button class="l-btn" onclick="chL('en', this)">EN</button>
             <button class="l-btn" onclick="chL('de', this)">DE</button>
         </div>
-        <p id="h-desc" style="font-size: 1.2em; line-height: 1.8; opacity: 0.9;"></p>
+        
+        <p id="h-desc" style="font-size: 1.15em; line-height: 1.8; opacity: 0.95;"></p>
+        
         <div class="ach-grid" id="ach-list"></div>
+
+        <div class="analysis-box">
+            <strong>Аналітичний висновок:</strong> 
+            <span id="h-analysis"></span>
+        </div>
     </main>
 
     <script>
-        /* Скопіюй сюди об'єкт data та функцію chL з попереднього коду для сторінки постаті */
+        const data = {
+            ua: {
+                name: "Іван Мазепа",
+                desc: "Гетьман Війська Запорозького, меценат та дипломат. Людина, яка спробувала вирвати Україну з-під московського протекторату та перетворити її на повноцінну європейську державу. Його правління — це 'золота доба' українського бароко.",
+                analysis: "Мазепа був першим українським лідером, який зрозумів: без культурної та освітньої бази політична незалежність неможлива. Його союз із Карлом XII був не зрадою, а геополітичним розрахунком на користь західного вектора розвитку.",
+                ach: [
+                    { t: "Меценатство", d: "Побудував та відреставрував понад 28 церков. Підтримував Києво-Могилянську академію." },
+                    { t: "Культурне Бароко", d: "Стиль 'мазепинського бароко' став візитівкою української архітектури того часу." },
+                    { t: "Політичний маневр", d: "Уклав таємний союз зі Швецією (1708) для звільнення України від деспотії Петра I." }
+                ]
+            },
+            en: {
+                name: "Ivan Mazepa",
+                desc: "Hetman of the Zaporozhian Host, patron of arts, and diplomat. A man who sought to lead Ukraine out of the Moscow protectorate towards becoming a full-fledged European state.",
+                analysis: "Mazepa was the first Ukrainian leader to realize that political independence is impossible without a strong cultural foundation. His alliance with Charles XII was a strategic move towards a Western-oriented future.",
+                ach: [
+                    { t: "Patronage", d: "Built and restored over 28 churches. Heavily supported the Kyiv-Mohyla Academy." },
+                    { t: "The Baroque Era", d: "The 'Mazepa Baroque' style became a hallmark of Ukrainian architecture." },
+                    { t: "Diplomatic Shift", d: "Formed a secret alliance with Sweden (1708) to liberate Ukraine from Peter I's rule." }
+                ]
+            },
+            de: {
+                name: "Iwan Masepa",
+                desc: "Hetman der Saporoger Kosaken, Mäzen und Diplomat. Er versuchte, die Ukraine aus dem Moskauer Protektorat zu lösen und sie in einen europäischen Staat zu verwandeln.",
+                analysis: "Masepa war der erste ukrainische Führer, der begriff, dass politische Unabhängigkeit ohne kulturelle Basis nicht möglich ist. Sein Bündnis mit Karl XII. war eine geopolitische Entscheidung für Europa.",
+                ach: [
+                    { t: "Mäzenatentum", d: "Baute und restaurierte über 28 Kirchen. Förderte die Kiewer-Mohyla-Akademie." },
+                    { t: "Ukrainisches Barock", d: "Der 'Masepa-Barock'-Stil prägte die ukrainische Architektur dieser Zeit nachhaltig." },
+                    { t: "Strategische Allianz", d: "Schloss 1708 ein geheimes Bündnis mit Schweden gegen die Despotie Peters I. ab." }
+                ]
+            }
+        };
+
+        function chL(lang, btn) {
+            document.querySelectorAll('.l-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const content = data[lang];
+            document.getElementById('h-name').innerText = content.name;
+            document.getElementById('h-desc').innerText = content.desc;
+            document.getElementById('h-analysis').innerText = content.analysis;
+            
+            const list = document.getElementById('ach-list');
+            list.innerHTML = content.ach.map(item => `
+                <div class="ach-card">
+                    <h3>${item.t}</h3>
+                    <p>${item.d}</p>
+                </div>
+            `).join('');
+        }
+
+        // Ініціалізація
+        chL('ua', document.querySelector('.l-btn'));
     </script>
 </body>
 </html>
