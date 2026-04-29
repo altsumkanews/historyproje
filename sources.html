@@ -25,10 +25,16 @@
 
         .custom-wrapper { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
-        /* Lang Switcher from Main Page */
-        .control-panel { display: flex; justify-content: center; gap: 10px; margin: 20px 0 40px; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 50px; width: fit-content; margin-left: auto; margin-right: auto; }
-        .lang-trigger { border: none; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 700; background: transparent; color: white; transition: 0.3s; }
-        .lang-trigger.active { background: var(--ua-gold); color: #000; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .control-panel { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 20px 0 30px; }
+        
+        .lang-switcher { display: flex; gap: 5px; background: rgba(255,255,255,0.05); padding: 5px; border-radius: 50px; border: 1px solid #333; }
+        .lang-trigger { border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-weight: 700; background: transparent; color: white; transition: 0.3s; }
+        .lang-trigger.active { background: var(--ua-gold); color: #000; }
+
+        /* Search Bar */
+        .search-container { width: 100%; max-width: 400px; position: relative; }
+        #sourceSearch { width: 100%; padding: 12px 20px; border-radius: 25px; border: 1px solid #444; background: #252525; color: white; outline: none; transition: 0.3s; }
+        #sourceSearch:focus { border-color: var(--ua-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.2); }
 
         .sources-card {
             background: var(--card-bg);
@@ -39,31 +45,29 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        h1 { font-size: 2.5em; font-weight: 900; margin-bottom: 20px; text-align: center; color: #fff; }
+        h1 { font-size: 2.5em; font-weight: 900; margin-bottom: 10px; text-align: center; color: #fff; }
         h2 { color: var(--ua-gold); border-bottom: 1px solid #444; padding-bottom: 10px; margin-top: 30px; font-size: 1.4em; }
 
         .source-list { list-style: none; padding: 0; }
-        .source-list li { margin: 15px 0; padding-left: 25px; position: relative; }
-        .source-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent-red); font-weight: bold; }
+        .source-list li { margin: 15px 0; padding: 10px 10px 10px 35px; position: relative; border-radius: 10px; transition: 0.3s; }
+        .source-list li::before { content: '→'; position: absolute; left: 10px; color: var(--accent-red); font-weight: bold; }
+        .source-list li:hover { background: rgba(255,255,255,0.05); }
+        .source-list li.highlight-random { background: rgba(255, 215, 0, 0.15); border: 1px solid var(--ua-gold); transform: scale(1.02); }
         
-        .source-list a { color: var(--text-main); text-decoration: none; transition: 0.3s; border-bottom: 1px solid transparent; }
-        .source-list a:hover { color: var(--ua-gold); border-bottom-color: var(--ua-gold); }
+        .source-list a { color: var(--text-main); text-decoration: none; transition: 0.3s; font-weight: 500; }
+        .source-list a:hover { color: var(--ua-gold); }
 
-        .methodology-box {
-            background: rgba(206, 18, 18, 0.05);
-            border-left: 4px solid var(--accent-red);
-            padding: 25px;
-            margin-top: 50px;
-            border-radius: 0 15px 15px 0;
-        }
+        .btn-random { background: var(--accent-red); color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: 0.3s; margin-top: 20px; display: block; margin-left: auto; margin-right: auto; }
+        .btn-random:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(206, 18, 18, 0.4); }
 
+        .methodology-box { background: rgba(206, 18, 18, 0.05); border-left: 4px solid var(--accent-red); padding: 25px; border-radius: 0 15px 15px 0; margin-top: 40px; }
         .footer-note { font-size: 0.85em; color: #777; margin-top: 40px; text-align: center; font-style: italic; }
 
-        /* Navbar Styling */
-        .top { padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(18,18,18,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #333; }
+        /* Navbar */
+        .top { padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(18,18,18,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #333; }
         .logo { font-weight: 900; text-decoration: none; color: #fff; font-size: 1.3em; }
         .navbar__menu { display: flex; list-style: none; padding: 0; margin: 0; }
-        .navbar__menu a { color: #fff; text-decoration: none; margin-left: 20px; font-weight: 600; font-size: 0.9em; }
+        .navbar__menu a { color: #fff; text-decoration: none; margin-left: 20px; font-weight: 600; font-size: 0.9em; transition: 0.3s; }
         .navbar__menu a:hover { color: var(--ua-gold); }
     </style>
 </head>
@@ -80,13 +84,18 @@
     </header>
 
     <main class="custom-wrapper">
-        <div class="control-panel">
-            <button class="lang-trigger active" onclick="updateLang('ua', this)">🇺🇦 UA</button>
-            <button class="lang-trigger" onclick="updateLang('en', this)">🇬🇧 EN</button>
-            <button class="lang-trigger" onclick="updateLang('de', this)">🇩🇪 DE</button>
-        </div>
-
         <h1 id="main-title">Використані джерела</h1>
+        
+        <div class="control-panel">
+            <div class="lang-switcher">
+                <button class="lang-trigger active" onclick="updateLang('ua', this)">🇺🇦 UA</button>
+                <button class="lang-trigger" onclick="updateLang('en', this)">🇬🇧 EN</button>
+                <button class="lang-trigger" onclick="updateLang('de', this)">🇩🇪 DE</button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="sourceSearch" onkeyup="searchSources()" placeholder="Пошук джерела...">
+            </div>
+        </div>
 
         <section class="sources-card">
             <h2 id="sec-intl">Міжнародні дослідження та ресурси</h2>
@@ -97,6 +106,8 @@
 
             <h2 id="sec-docs">Офіційні документи</h2>
             <ul class="source-list" id="list-docs"></ul>
+
+            <button class="btn-random" id="btn-random" onclick="highlightRandom()">✨ Випадкове джерело</button>
         </section>
 
         <section class="methodology-box" id="methodology">
@@ -112,90 +123,87 @@
     <script>
         const db = {
             ua: {
-                navHome: "Головна", navIntro: "Вступ",
-                title: "Використані джерела",
-                secIntl: "Міжнародні дослідження та ресурси",
-                secUa: "Українські історичні ресурси",
-                secDocs: "Офіційні документи",
-                methTitle: "Методологія та дослідження",
-                methDesc: "В межах підготовки проєкту було проведено соціологічне опитування серед студентів провідних навчальних закладів України для аналізу сприйняття історичної тяглості російсько-української війни:",
-                methUni: ["Київський Національний Університет імені Тараса Шевченка", "Львівський Національний Університет імені Івана Франка"],
-                methFooter: "Результати опитування підтверджують високий рівень усвідомлення сучасного конфлікту як продовження багатовікової імперської політики Росії.",
-                footer: "Переклад матеріалів та адаптація термінів виконані за допомогою DeepL, Google Translate та Google Gemini.",
-                intlLinks: [
-                    {n: "Yale University: The Making of Modern Ukraine (Timothy Snyder)", u: "https://online.yale.edu/courses/making-modern-ukraine"},
-                    {n: "Encyclopedia Britannica: Історія України", u: "https://www.britannica.com/place/Ukraine/History"},
-                    {n: "The Guardian: Використання історії Путіним для виправдання війни", u: "https://www.theguardian.com/world/2022/feb/25/vladimir-putin-ukraine-history-speech-guide"},
-                    {n: "Atlantic Council: UkraineAlert", u: "https://www.atlanticcouncil.org/blogs/ukrainealert/"},
-                    {n: "Вікіпедія: Історія України (Глобальне видання)", u: "https://en.wikipedia.org/wiki/History_of_Ukraine"}
-                ],
-                uaLinks: [
-                    {n: "Інститут історії України НАН України", u: "https://history.org.ua/uk"},
-                    {n: "Український інститут національної пам'яті", u: "https://uinp.gov.ua/"},
-                    {n: "Проєкт «Локальна історія»", u: "https://localhistory.org.ua/"},
-                    {n: "Електронна бібліотека «Чтиво»", u: "https://shron1.chtyvo.org.ua/"}
-                ],
-                docLinks: [
-                    {n: "Державна архівна служба України", u: "https://archives.gov.ua/"},
-                    {n: "МЗС України: Історія та сучасність", u: "https://mfa.gov.ua/pro-ukrayinu/istoriya-ukrayini"}
-                ]
-            },
-            en: {
-                navHome: "Home", navIntro: "Introduction",
-                title: "Sources Used",
-                secIntl: "International Research & Resources",
-                secUa: "Ukrainian Historical Resources",
-                secDocs: "Official Documents",
-                methTitle: "Methodology & Research",
-                methDesc: "As part of the project preparation, a sociological survey was conducted among students of leading Ukrainian educational institutions to analyze the perception of the historical continuity of the Russian-Ukrainian war:",
-                methUni: ["Taras Shevchenko National University of Kyiv", "Ivan Franko National University of Lviv"],
-                methFooter: "Survey results confirm a high level of awareness of the current conflict as a continuation of Russia's centuries-old imperial policy.",
-                footer: "Translation of materials and adaptation of terms were carried out using DeepL, Google Translate, and Google Gemini.",
+                navHome: "Головна", navIntro: "Вступ", title: "Використані джерела",
+                secIntl: "Міжнародні дослідження та ресурси", secUa: "Українські історичні ресурси",
+                secDocs: "Офіційні документи", methTitle: "Методологія та дослідження",
+                methDesc: "В межах проєкту проведено опитування серед студентів провідних ВНЗ:",
+                methUni: ["КНУ імені Тараса Шевченка", "ЛНУ імені Івана Франка"],
+                methFooter: "Результати підтверджують тяглість імперської політики Росії.",
+                footer: "Матеріали адаптовані за допомогою DeepL та Google Gemini.",
+                searchPlaceholder: "Пошук джерела...",
+                btnRandom: "✨ Випадкове джерело",
                 intlLinks: [
                     {n: "Yale University: The Making of Modern Ukraine (Timothy Snyder)", u: "https://online.yale.edu/courses/making-modern-ukraine"},
                     {n: "Encyclopedia Britannica: History of Ukraine", u: "https://www.britannica.com/place/Ukraine/History"},
-                    {n: "The Guardian: Putin’s use of history to justify the war", u: "https://www.theguardian.com/world/2022/feb/25/vladimir-putin-ukraine-history-speech-guide"},
-                    {n: "Atlantic Council: UkraineAlert Service", u: "https://www.atlanticcouncil.org/blogs/ukrainealert/"},
+                    {n: "Atlantic Council: UkraineAlert (Аналітика)", u: "https://www.atlanticcouncil.org/blogs/ukrainealert/"},
+                    {n: "BBC: Ukraine's history explained", u: "https://www.bbc.com/news/world-europe-18010123"},
+                    {n: "Вікіпедія: Історія України (Глобальна)", u: "https://en.wikipedia.org/wiki/History_of_Ukraine"}
+                ],
+                uaLinks: [
+                    {n: "Інститут історії України НАН України", u: "http://history.org.ua/uk"},
+                    {n: "Український інститут національної пам'яті", u: "https://uinp.gov.ua/"},
+                    {n: "Проєкт «Локальна історія»", u: "https://localhistory.org.ua/"},
+                    {n: "Електронна бібліотека «Діаспоріана»", u: "https://diasporiana.org.ua/"}
+                ],
+                docLinks: [
+                    {n: "Державна архівна служба України", u: "https://archives.gov.ua/"},
+                    {n: "Ukraine.ua: Офіційна історія (МЗС)", u: "https://ukraine.ua/visit/history-of-ukraine/"}
+                ]
+            },
+            en: {
+                navHome: "Home", navIntro: "Introduction", title: "Sources Used",
+                secIntl: "International Resources", secUa: "Ukrainian Historical Resources",
+                secDocs: "Official Documents", methTitle: "Methodology & Research",
+                methDesc: "The project included a survey among students of leading universities:",
+                methUni: ["Taras Shevchenko National University", "Ivan Franko National University"],
+                methFooter: "Results confirm the continuity of Russia's imperial policy.",
+                footer: "Materials adapted using DeepL and Google Gemini.",
+                searchPlaceholder: "Search source...",
+                btnRandom: "✨ Random Source",
+                intlLinks: [
+                    {n: "Yale University: The Making of Modern Ukraine (Timothy Snyder)", u: "https://online.yale.edu/courses/making-modern-ukraine"},
+                    {n: "Encyclopedia Britannica: History of Ukraine", u: "https://www.britannica.com/place/Ukraine/History"},
+                    {n: "Atlantic Council: UkraineAlert (Analytics)", u: "https://www.atlanticcouncil.org/blogs/ukrainealert/"},
+                    {n: "BBC: Ukraine's history explained", u: "https://www.bbc.com/news/world-europe-18010123"},
                     {n: "Wikipedia: History of Ukraine (Global Edition)", u: "https://en.wikipedia.org/wiki/History_of_Ukraine"}
                 ],
                 uaLinks: [
-                    {n: "Institute of History of Ukraine, NASU", u: "https://history.org.ua/uk"},
+                    {n: "Institute of History of Ukraine, NASU", u: "http://history.org.ua/uk"},
                     {n: "Ukrainian Institute of National Remembrance", u: "https://uinp.gov.ua/"},
                     {n: "Local History Project", u: "https://localhistory.org.ua/"},
-                    {n: "Electronic Library 'Chtyvo'", u: "https://shron1.chtyvo.org.ua/"}
+                    {n: "Electronic Library 'Diasporiana'", u: "https://diasporiana.org.ua/"}
                 ],
                 docLinks: [
                     {n: "State Archival Service of Ukraine", u: "https://archives.gov.ua/"},
-                    {n: "MFA of Ukraine: History and Modernity", u: "https://mfa.gov.ua/en/about-ukraine/history-ukraine"}
+                    {n: "Ukraine.ua: Official History (MFA)", u: "https://ukraine.ua/visit/history-of-ukraine/"}
                 ]
             },
             de: {
-                navHome: "Startseite", navIntro: "Einleitung",
-                title: "Verwendete Quellen",
-                secIntl: "Internationale Forschung & Ressourcen",
-                secUa: "Ukrainische historische Ressourcen",
-                secDocs: "Offizielle Dokumente",
-                methTitle: "Methodik & Forschung",
-                methDesc: "Im Rahmen der Projektvorbereitung wurde eine soziologische Umfrage unter Studenten führender ukrainischer Bildungseinrichtungen durchgeführt, um die Wahrnehmung der historischen Kontinuität des russisch-ukrainischen Krieges zu analysieren:",
-                methUni: ["Nationale Taras-Schewtschenko-Universität Kiew", "Nationale Iwan-Franko-Universität Lwiw"],
-                methFooter: "Die Umfrageergebnisse bestätigen ein hohes Bewusstsein für den aktuellen Konflikt als Fortsetzung der jahrhundertelangen imperialen Politik Russlands.",
-                footer: "Die Übersetzung der Materialien und die Anpassung der Begriffe erfolgte mit Hilfe von DeepL, Google Translate und Google Gemini.",
+                navHome: "Startseite", navIntro: "Einleitung", title: "Quellen",
+                secIntl: "Internationale Ressourcen", secUa: "Ukrainische historische Ressourcen",
+                secDocs: "Offizielle Dokumente", methTitle: "Methodik & Forschung",
+                methDesc: "Umfrage unter Studenten führender Universitäten:",
+                methUni: ["T.-Schewtschenko-Universität Kiew", "I.-Franko-Universität Lwiw"],
+                methFooter: "Ergebnisse bestätigen die Kontinuität der imperialen Politik Russlands.",
+                footer: "Übersetzt mit DeepL und Google Gemini.",
+                searchPlaceholder: "Quelle suchen...",
+                btnRandom: "✨ Zufällige Quelle",
                 intlLinks: [
                     {n: "Yale University: The Making of Modern Ukraine (Timothy Snyder)", u: "https://online.yale.edu/courses/making-modern-ukraine"},
                     {n: "Encyclopedia Britannica: Geschichte der Ukraine", u: "https://www.britannica.com/place/Ukraine/History"},
-                    {n: "The Guardian: Putins Nutzung der Geschichte zur Rechtfertigung des Krieges", u: "https://www.theguardian.com/world/2022/feb/25/vladimir-putin-ukraine-history-speech-guide"},
                     {n: "Atlantic Council: UkraineAlert", u: "https://www.atlanticcouncil.org/blogs/ukrainealert/"},
-                    {n: "Wikipedia: Geschichte der Ukraine (Globale Ausgabe)", u: "https://de.wikipedia.org/wiki/Geschichte_der_Ukraine"}
+                    {n: "BBC: Ukraine's history explained", u: "https://www.bbc.com/news/world-europe-18010123"},
+                    {n: "Wikipedia: Geschichte der Ukraine", u: "https://de.wikipedia.org/wiki/Geschichte_der_Ukraine"}
                 ],
                 uaLinks: [
-                    {n: "Institut für Geschichte der Ukraine, NASU", u: "https://history.org.ua/uk"},
+                    {n: "Institut für Geschichte der Ukraine", u: "http://history.org.ua/uk"},
                     {n: "Ukrainisches Institut für nationales Gedenken", u: "https://uinp.gov.ua/"},
                     {n: "Projekt 'Lokale Geschichte'", u: "https://localhistory.org.ua/"},
-                    {n: "Elektronische Bibliothek 'Chtyvo'", u: "https://shron1.chtyvo.org.ua/"}
+                    {n: "Bibliothek 'Diasporiana'", u: "https://diasporiana.org.ua/"}
                 ],
                 docLinks: [
                     {n: "Staatlicher Archivdienst der Ukraine", u: "https://archives.gov.ua/"},
-                    {n: "Außenministerium der Ukraine: Geschichte und Gegenwart", u: "https://mfa.gov.ua/en/about-ukraine/history-ukraine"}
+                    {n: "Ukraine.ua: Offizielle Geschichte (MFA)", u: "https://ukraine.ua/visit/history-of-ukraine/"}
                 ]
             }
         };
@@ -204,7 +212,6 @@
             document.querySelectorAll('.lang-trigger').forEach(x => x.classList.remove('active'));
             b.classList.add('active');
 
-            // Static Text
             document.getElementById('nav-home').innerText = db[l].navHome;
             document.getElementById('nav-intro').innerText = db[l].navIntro;
             document.getElementById('main-title').innerText = db[l].title;
@@ -215,15 +222,13 @@
             document.getElementById('meth-desc').innerText = db[l].methDesc;
             document.getElementById('meth-footer').innerText = db[l].methFooter;
             document.getElementById('footer-text').innerHTML = db[l].footer;
+            document.getElementById('sourceSearch').placeholder = db[l].searchPlaceholder;
+            document.getElementById('btn-random').innerText = db[l].btnRandom;
 
-            // University List
             const uniList = document.getElementById('meth-list');
             uniList.innerHTML = '';
-            db[l].methUni.forEach(u => {
-                uniList.innerHTML += `<li><strong>${u}</strong></li>`;
-            });
+            db[l].methUni.forEach(u => { uniList.innerHTML += `<li><strong>${u}</strong></li>`; });
 
-            // Links Rendering
             renderLinks('list-intl', db[l].intlLinks);
             renderLinks('list-ua', db[l].uaLinks);
             renderLinks('list-docs', db[l].docLinks);
@@ -235,6 +240,23 @@
             links.forEach(link => {
                 container.innerHTML += `<li><a href="${link.u}" target="_blank">${link.n}</a></li>`;
             });
+        }
+
+        function searchSources() {
+            let input = document.getElementById('sourceSearch').value.toLowerCase();
+            let items = document.querySelectorAll('.source-list li');
+            items.forEach(item => {
+                let text = item.innerText.toLowerCase();
+                item.style.display = text.includes(input) ? "" : "none";
+            });
+        }
+
+        function highlightRandom() {
+            let items = document.querySelectorAll('.source-list li');
+            items.forEach(i => i.classList.remove('highlight-random'));
+            let randomItem = items[Math.floor(Math.random() * items.length)];
+            randomItem.classList.add('highlight-random');
+            randomItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         window.onload = () => { updateLang('ua', document.querySelector('.lang-trigger.active')); };
