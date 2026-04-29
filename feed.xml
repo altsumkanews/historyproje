@@ -3,10 +3,41 @@
     <title>School History Project</title>
     <link href="https://altsumkanews.github.io/historyproje/feed.xml" rel="self" />
     <link href="https://altsumkanews.github.io/historyproje" />
-    <updated>1970-01-01T03:00:00+03:00</updated>
+    <updated>2026-04-29T16:19:54+03:00</updated>
     <author>
         <name>Shtan Bohdan</name>
     </author>
     <id>https://altsumkanews.github.io/historyproje</id>
 
+    <entry>
+        <title>School project</title>
+        <author>
+            <name>Shtan Bohdan</name>
+        </author>
+        <link href="https://altsumkanews.github.io/historyproje/school-project.html"/>
+        <id>https://altsumkanews.github.io/historyproje/school-project.html</id>
+
+        <updated>2026-04-29T16:19:54+03:00</updated>
+            <summary type="html">
+                <![CDATA[
+                    English Welcome! You can read this project in English to understand the historical roots of the current war and the cycles of imperial aggression. [Read in English] Вітаємо! Ви можете прочитати цей проєкт українською мовою, щоб дослідити «історичну петлю» та тяглість боротьби за нашу незалежність.
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                
+  <p>
+    <strong>English</strong><br>Welcome!<br>You can read this project in English to understand the historical roots of the current war and the cycles of imperial aggression.<br>[Read in English]
+  </p>
+
+  <p>
+    <strong>Вітаємо!</strong><br>Ви можете прочитати цей проєкт українською мовою, щоб дослідити «історичну петлю» та тяглість боротьби за нашу незалежність.<br>[Читати українською]
+  </p>
+
+  <p>
+    <strong>Deutsch</strong><br>Willkommen!<br>Sie können dieses Projekt auf Deutsch lesen, um die historischen Hintergründe des aktuellen Krieges und die Zyklen der imperialen Aggression zu verstehen.<br>[Auf Deutsch lesen]
+  </p>
+            ]]>
+        </content>
+    </entry>
 </feed>
