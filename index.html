@@ -55,17 +55,44 @@
     <header class="top js-header">
         <a class="logo" href="https://altsumkanews.github.io/historyproje/">School History Project</a>
         <nav class="navbar js-navbar">
-            <ul class="navbar__menu">
-                <li><a href="https://altsumkanews.github.io/historyproje/">Homepage</a></li>
-                <li><a href="sources.html">Джерела(Sources)</a></li>
-                <li class="has-submenu">
-                    <a href="#">Navigation</a>
-                    <ul class="navbar__submenu level-2">
-                        <li><a href="https://altsumkanews.github.io/historyproje/vstup-viyna-yak-istorichne-yavishche.html">Вступ</a></li>
-                        <li><a href="https://altsumkanews.github.io/historyproje/navigaciya-po-proiektu-dlya-en-de-project-navigation-en-projekt-navigation-de.html">Navigation EN/DE</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <style>
+    /* Стилі для випадаючого меню */
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #1e1e1e;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+        z-index: 1;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        margin: 0 !important;
+        font-size: 0.85em;
+    }
+    .dropdown-content a:hover { background-color: #333; color: var(--ua-gold); }
+    .dropdown:hover .dropdown-content { display: block; }
+</style>
+
+<ul class="navbar__menu">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="vstup.html">📖 Intro</a></li>
+    <li class="dropdown">
+        <a href="#" style="cursor: default;">➕ More ▾</a>
+        <div class="dropdown-content">
+            <a href="interactives.html">🎮 Interactives</a>
+            <a href="hero.html">📜 Biography</a>
+            <a href="germany.html">🇩🇪 Germany</a>
+        </div>
+    </li>
+    <li><a href="sources.html">📚 Sources</a></li>
+</ul>
         </nav>
     </header>
 
