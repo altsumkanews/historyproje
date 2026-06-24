@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Interaktive Extras - The Historical Loop</title>
+    <title>Interaktive Extras - The Russo-Ukrainian War</title>
     <style>
         :root { --ua-blue: #0057b7; --ua-gold: #ffd700; --accent-red: #ce1212; --dark-bg: #121212; --card-bg: #1e1e1e; --text-main: #e0e0e0; }
         body { background: var(--dark-bg); color: var(--text-main); font-family: 'Segoe UI', sans-serif; margin: 0; line-height: 1.6; }
-        
+
         /* Navbar Styles */
         .top { padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(18,18,18,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #333; }
         .logo { font-weight: 900; text-decoration: none; color: #fff; font-size: 1.3em; }
@@ -16,7 +16,7 @@
         .navbar__menu a:hover { color: var(--ua-gold); }
 
         .wrapper { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-        
+
         /* Lang Switcher */
         .control-panel { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; }
         .lang-trigger { border: 1px solid #444; padding: 8px 15px; border-radius: 30px; cursor: pointer; background: transparent; color: white; transition: 0.3s; font-weight: bold; }
@@ -60,11 +60,11 @@
 
         <h1 id="title" style="text-align: center; font-size: 2.5em; color: white; margin-bottom: 50px;">Інтерактивні додатки</h1>
 
-        <h2 id="myth-title" style="color: var(--ua-gold);">🛡️ Детектор міфів</h2>
+        <h2 id="myth-title" style="color: var(--ua-gold);">🛡️ Детектор міфів про війну</h2>
         <div class="myth-grid" id="myth-container"></div>
 
         <div class="quiz-card">
-            <h2 id="quiz-title" style="color: var(--ua-gold); margin-top:0;">📝 Історичний квіз</h2>
+            <h2 id="quiz-title" style="color: var(--ua-gold); margin-top:0;">📝 Квіз: Російсько-українська війна</h2>
             <div id="quiz-body">
                 <h3 id="question-text" style="font-size: 1.3em;"></h3>
                 <div id="options-container"></div>
@@ -80,44 +80,44 @@
     <script>
         const content = {
             ua: {
-                title: "Інтерактивні додатки", mythT: "Детектор міфів", quizT: "Історичний квіз",
+                title: "Інтерактивні додатки", mythT: "Детектор міфів про війну", quizT: "Квіз: Російсько-українська війна",
                 myths: [
-                    {f: "Міф: Україну створив Ленін", b: "Факт: Українська державність має тисячолітню історію від Русі до Гетьманщини."},
-                    {f: "Міф: Українська мова — діалект російської", b: "Факт: Українська мова ближча до білоруської, польської та чеської, ніж до російської."},
-                    {f: "Міф: Крим завжди був російським", b: "Факт: Росія анексувала Крим лише у 1783 році, витіснивши корінний народ — кримських татар."}
+                    {f: "Міф: Війна розпочалася у 2022 році", b: "Факт: Російська агресія розпочалася у лютому 2014 року з окупації Криму та частини Донбасу."},
+                    {f: "Міф: «Спецоперація» мала тривати 3 дні", b: "Факт: Російський план швидкого захоплення Києва повністю провалився завдяки спротиву ЗСУ та суспільства."},
+                    {f: "Міф: Санкції не впливають на Росію", b: "Факт: Світові санкції суттєво обмежують технологічний розвиток РФ та її доходи від експорту енергоносіїв."}
                 ],
                 quiz: [
-                    {q: "Хто заснував Київ?", a: ["Кий, Щек і Хорив", "Юрій Долгорукий", "Ленін"], c: 0},
-                    {q: "Коли була прийнята Конституція Пилипа Орлика?", a: ["1710", "1991", "1848"], c: 0},
-                    {q: "Який символ є гербом України?", a: ["Тризуб", "Двоголовий орел", "Зірка"], c: 0}
+                    {q: "У якому році Росія анексувала Крим та розпочала війну на Донбасі?", a: ["2014 рік", "2018 рік", "2022 рік"], c: 0},
+                    {q: "Яку назву отримав цивільний та військовий опір мешканців під час оборони Маріуполя на заводі?", a: ["Азовсталь", "Арсенал", "Запоріжсталь"], c: 0},
+                    {q: "Коли відбулося повномасштабне вторгнення Росії в Україну?", a: ["24 лютого 2022", "12 квітня 2014", "9 травня 2023"], c: 0}
                 ],
                 next: "Далі →", restart: "Спочатку", score: "Твій результат: "
             },
             en: {
-                title: "Interactive Extras", mythT: "Myth Detector", quizT: "Historical Quiz",
+                title: "Interactive Extras", mythT: "War Myth Detector", quizT: "Quiz: Russo-Ukrainian War",
                 myths: [
-                    {f: "Myth: Ukraine was created by Lenin", b: "Fact: Ukrainian statehood has a millennium of history from Rus to the Cossack Hetmanate."},
-                    {f: "Myth: Ukrainian is a dialect of Russian", b: "Fact: Ukrainian is linguistically closer to Belarusian, Polish, and Czech."},
-                    {f: "Myth: Crimea has always been Russian", b: "Fact: Russia annexed Crimea only in 1783, displacing the indigenous Crimean Tatars."}
+                    {f: "Myth: The war started in 2022", b: "Fact: Russian aggression began in February 2014 with the occupation of Crimea and parts of Donbas."},
+                    {f: "Myth: The 'special operation' was meant to last 3 days", b: "Fact: The Russian blitzkrieg plan to capture Kyiv completely failed due to the fierce resistance of Ukraine."},
+                    {f: "Myth: Sanctions do not affect Russia", b: "Fact: Global sanctions significantly restrict Russia's technological growth and energy revenues."}
                 ],
                 quiz: [
-                    {q: "Who founded Kyiv?", a: ["Kyi, Shchek, and Khoryv", "Yuri Dolgorukiy", "Lenin"], c: 0},
-                    {q: "When was Pylyp Orlyk's Constitution written?", a: ["1710", "1991", "1848"], c: 0},
-                    {q: "What is the national coat of arms of Ukraine?", a: ["Tryzub (Trident)", "Double-headed eagle", "Star"], c: 0}
+                    {q: "In which year did Russia annex Crimea and start the war in Donbas?", a: ["2014", "2018", "2022"], c: 0},
+                    {q: "What was the name of the steel plant where Ukrainian defenders held the line in Mariupol?", a: ["Azovstal", "Arsenal", "Zaporizhstal"], c: 0},
+                    {q: "When did Russia launch its full-scale invasion of Ukraine?", a: ["February 24, 2022", "April 12, 2014", "May 9, 2023"], c: 0}
                 ],
                 next: "Next →", restart: "Restart", score: "Your score: "
             },
             de: {
-                title: "Interaktive Extras", mythT: "Mythos-Detektor", quizT: "Geschichtsquiz",
+                title: "Interaktive Extras", mythT: "Kriegsmythos-Detektor", quizT: "Quiz: Der Russisch-Ukrainische Krieg",
                 myths: [
-                    {f: "Mythos: Ukraine wurde von Lenin erschaffen", b: "Fakt: Die ukrainische Staatlichkeit hat eine jahrtausendealte Geschichte von der Rus bis zum Hetmanat."},
-                    {f: "Mythos: Ukrainisch ist ein Dialekt des Russischen", b: "Fakt: Ukrainisch ist linguistisch näher an Belarussisch, Polnisch und Tschechisch."},
-                    {f: "Mythos: Die Krim war schon immer russisch", b: "Fakt: Russland annektierte die Krim erst 1783 und vertrieb die Krimtataren."},
+                    {f: "Mythos: Der Krieg begann erst 2022", b: "Fakt: Die russische Aggression begann im Februar 2014 mit der Besetzung der Krim und Teilen des Donbas."},
+                    {f: "Mythos: Die 'Spezialoperation' sollte 3 Tage dauern", b: "Fakt: Der russische Blitzkrieg-Plan zur Einnahme von Kiew scheiterte am Widerstand der Ukraine völlig."},
+                    {f: "Mythos: Sanktionen haben keine Wirkung auf Russland", b: "Fakt: Globale Sanktionen schränken die technologische Entwicklung und die Energieeinnahmen Russlands stark ein."}
                 ],
                 quiz: [
-                    {q: "Wer hat Kiew gegründet?", a: ["Kyi, Schtschek und Choryw", "Juri Dolgoruki", "Lenin"], c: 0},
-                    {q: "Wann wurde die Verfassung von Pylyp Orlyk verfasst?", a: ["1710", "1991", "1848"], c: 0},
-                    {q: "Was ist das Wappen der Ukraine?", a: ["Tryzub (Dreizack)", "Doppeladler", "Stern"], c: 0}
+                    {q: "In welchem Jahr hat Russland die Krim annektiert und den Krieg im Donbas begonnen?", a: ["2014", "2018", "2022"], c: 0},
+                    {q: "Wie hieß das Stahlwerk, in dem ukrainische Verteidiger in Mariupol Widerstand leisteten?", a: ["Azovstal", "Arsenal", "Zaporizhstal"], c: 0},
+                    {q: "Wann begann die umfassende Invasion Russlands in der Ukraine?", a: ["24. Februar 2022", "12. April 2014", "9. Mai 2023"], c: 0}
                 ],
                 next: "Weiter →", restart: "Neustart", score: "Dein Ergebnis: "
             }
@@ -137,7 +137,7 @@
             document.getElementById('title').innerText = l.title;
             document.getElementById('myth-title').innerText = l.mythT;
             document.getElementById('quiz-title').innerText = l.quizT;
-            
+
             const mc = document.getElementById('myth-container');
             mc.innerHTML = '';
             l.myths.forEach(m => {
